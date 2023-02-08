@@ -9,6 +9,9 @@ cimport libcpp.queue
 from libcpp.pair cimport *
 from libcpp.queue  cimport *
 
+import time
+import csv
+
 @cython.boundscheck(False)
 @cython.wraparound(False)
 cdef np.ndarray[np.int32_t, ndim=2] _pa(np.ndarray[np.uint8_t, ndim=3] kernels,
@@ -25,6 +28,10 @@ cdef np.ndarray[np.int32_t, ndim=2] _pa(np.ndarray[np.uint8_t, ndim=3] kernels,
     cdef np.ndarray[np.uint8_t, ndim=3] inds = np.zeros((label_num, label.shape[0], label.shape[1]), dtype=np.uint8)
     cdef np.ndarray[np.int32_t, ndim=2] p = np.zeros((label_num, 2), dtype=np.int32)
 
+    global s1, s2, s3
+
+    s1 = time.time()
+    #####################################################################################################
     cdef np.float32_t max_rate = 1024
     for i in range(1, label_num):
         ind = label == i
@@ -52,7 +59,13 @@ cdef np.ndarray[np.int32_t, ndim=2] _pa(np.ndarray[np.uint8_t, ndim=3] kernels,
                 if flag[j] == 0:
                     flag[j] = 1
                     mean_emb[j] = np.mean(emb[:, inds[j].astype(np.bool)], axis=1)
-
+    #####################################################################################################
+    s1 = time.time() - s1
+    #####################################################################################################
+    #####################################################################################################
+    #####################################################################################################
+    s2 = time.time()
+    #####################################################################################################
     cdef libcpp.queue.queue[libcpp.pair.pair[np.int16_t, np.int16_t]] que = \
         queue[libcpp.pair.pair[np.int16_t, np.int16_t]]()
     cdef libcpp.queue.queue[libcpp.pair.pair[np.int16_t, np.int16_t]] nxt_que = \
@@ -66,7 +79,13 @@ cdef np.ndarray[np.int32_t, ndim=2] _pa(np.ndarray[np.uint8_t, ndim=3] kernels,
         tmpx, tmpy = points[point_idx, 0], points[point_idx, 1]
         que.push(pair[np.int16_t, np.int16_t](tmpx, tmpy))
         pred[tmpx, tmpy] = label[tmpx, tmpy]
-
+    #####################################################################################################
+    s2 = time.time() - s2
+    #####################################################################################################
+    #####################################################################################################
+    #####################################################################################################
+    s3 = time.time()
+    #####################################################################################################
     cdef libcpp.pair.pair[np.int16_t, np.int16_t] cur
     cdef int cur_label
     for kernel_idx in range(kernel_num - 2, -1, -1):
@@ -93,12 +112,20 @@ cdef np.ndarray[np.int32_t, ndim=2] _pa(np.ndarray[np.uint8_t, ndim=3] kernels,
                 nxt_que.push(cur)
 
         que, nxt_que = nxt_que, que
-
+    #####################################################################################################
+    s3 = time.time() - s3
+    #####################################################################################################
     return pred
 
 def pa(kernels, emb, min_area=0):
+    global s0
+    #####################################################################################################
+    s0 = time.time()
+    #####################################################################################################
     kernel_num = kernels.shape[0]
     _, cc = cv2.connectedComponents(kernels[0], connectivity=4)
     label_num, label = cv2.connectedComponents(kernels[1], connectivity=4)
-
-    return _pa(kernels[:-1], emb, label, cc, kernel_num, label_num, min_area)
+    #####################################################################################################
+    s0 = time.time() - s0
+    #####################################################################################################
+    return _pa(kernels[:-1], emb, label, cc, kernel_num, label_num, min_area), [s0, s1, s2, s3]
