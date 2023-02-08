@@ -1,6 +1,6 @@
 # Speed Improvement of PAN++
 
-# Ver 1. (Conventional Version, Vanilla PAN++)
+## Ver 1. [(Conventional Version, Vanilla PAN++)](https://github.com/Zerohertz/pan_pp.pytorch/commit/02b70de62d8c9d58cd240e3b95cda82a16edf0b5)
 
 ||g0|g1|g2|g3|g4|Total|
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -12,7 +12,7 @@
 |Time [ms]|2.800|336.512|7.402|2.780|349.495|
 |Weight [%]|0.801|96.285|2.118|0.796|-|
 
-# Ver 2. [(Update ./models/post_processing/pa/pa.pyx)](https://github.com/Zerohertz/pan_pp.pytorch/commit/795a066f2730a68b02443e4d3bdbb004b1d98046)
+## Ver 2. [(Update ./models/post_processing/pa/pa.pyx)](https://github.com/Zerohertz/pan_pp.pytorch/commit/795a066f2730a68b02443e4d3bdbb004b1d98046)
 
 ||g0|g1|g2|g3|g4|Total|
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
