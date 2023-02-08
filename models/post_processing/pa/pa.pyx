@@ -25,7 +25,7 @@ cdef np.ndarray[np.int32_t, ndim=2] _pa(np.ndarray[np.uint8_t, ndim=3] kernels,
     cdef np.ndarray[np.float32_t, ndim=2] mean_emb = np.zeros((label_num, 4), dtype=np.float32)
     cdef np.ndarray[np.float32_t, ndim=1] area = np.full((label_num,), -1, dtype=np.float32)
     cdef np.ndarray[np.int32_t, ndim=1] flag = np.zeros((label_num,), dtype=np.int32)
-    cdef np.ndarray[np.uint8_t, ndim=3] inds = np.zeros((label_num, label.shape[0], label.shape[1]), dtype=np.uint8)
+    cdef np.ndarray[np.uint8_t, ndim=3] inds = np.zeros((label_num, label.shape[0], label.shape[1]), dtype=np.bool)
     cdef np.ndarray[np.int32_t, ndim=2] p = np.zeros((label_num, 2), dtype=np.int32)
 
     global s1, s2, s3
@@ -33,19 +33,31 @@ cdef np.ndarray[np.int32_t, ndim=2] _pa(np.ndarray[np.uint8_t, ndim=3] kernels,
     s1 = time.time()
     #####################################################################################################
     cdef np.float32_t max_rate = 1024
+    cdef int i, j, tmp
+    
+    px = [np.zeros((0,), dtype=np.int32) for _ in range(label_num)]
+    py = [np.zeros((0,), dtype=np.int32) for _ in range(label_num)]
+    
+    for i in range(label.shape[0]):
+        for j in range(label.shape[1]):
+            tmp = label[i][j]
+            if tmp == 0:
+                continue
+            else:
+                inds[tmp][i][j] = True
+                if area[tmp] == -1:
+                    area[tmp] = 1
+                else:
+                    area[tmp] += 1
+                px[tmp] = np.append(px[tmp], i)
+                py[tmp] = np.append(py[tmp], j)
+
     for i in range(1, label_num):
-        ind = label == i
-        inds[i] = ind
-
-        area[i] = np.sum(ind)
-
+        ind = inds[i]
         if area[i] < min_area:
             label[ind] = 0
             continue
-
-        px, py = np.where(ind)
-        p[i] = (px[0], py[0])
-
+        p[i] = (px[i][0], py[i][0])
         for j in range(1, i):
             if area[j] < min_area:
                 continue
