@@ -60,24 +60,27 @@ def test(test_loader, model, cfg):
     model.eval()
 
     with_rec = hasattr(cfg.model, 'recognition_head')
-    if with_rec:
-        pp = Corrector(cfg.data.test.type, **cfg.test_cfg.rec_post_process)
+#     if with_rec:
+#         pp = Corrector(cfg.data.test.type, **cfg.test_cfg.rec_post_process)
 
-    if cfg.vis:
-        vis = Visualizer(vis_path=osp.join('vis/', cfg.data.test.type))
+#     if cfg.vis:
+#         vis = Visualizer(vis_path=osp.join('vis/', cfg.data.test.type))
 
     rf = ResultFormat(cfg.data.test.type, cfg.test_cfg.result_path)
 
-    if cfg.report_speed:
-        speed_meters = dict(
-            backbone_time=AverageMeter(500),
-            neck_time=AverageMeter(500),
-            det_head_time=AverageMeter(500),
-            det_post_time=AverageMeter(500),
-            rec_time=AverageMeter(500),
-            total_time=AverageMeter(500))
+#     if cfg.report_speed:
+#         speed_meters = dict(
+#             backbone_time=AverageMeter(500),
+#             neck_time=AverageMeter(500),
+#             det_head_time=AverageMeter(500),
+#             det_post_time=AverageMeter(500),
+#             rec_time=AverageMeter(500),
+#             total_time=AverageMeter(500))
 
     print('Start testing %d images' % len(test_loader))
+    cfg.debug = False
+    cfg.report_speed = False
+    
     for idx, data in enumerate(test_loader):
         print('Testing %d/%d\r' % (idx, len(test_loader)), end='', flush=True)
 
@@ -89,18 +92,21 @@ def test(test_loader, model, cfg):
         with torch.no_grad():
             outputs = model(**data)
 
-        if cfg.report_speed:
-            report_speed(outputs, speed_meters)
+#         if cfg.report_speed:
+#             report_speed(outputs, speed_meters)
         # post process of recognition
-        if with_rec:
-            outputs = pp.process(data['img_metas'], outputs)
+#         if with_rec:
+#             outputs = pp.process(data['img_metas'], outputs)
 
         # save result
-        rf.write_result(data['img_metas'], outputs)
+        image_name, _ = osp.splitext(osp.basename(test_loader.dataset.img_paths[idx]))
+        image_path=test_loader.dataset.img_paths[idx]
+        rf.write_result(image_name, image_path, outputs)
+#         rf.write_result(data['img_metas'], outputs)
 
         # visualize
-        if cfg.vis:
-            vis.process(data['img_metas'], outputs)
+#         if cfg.vis:
+#             vis.process(data['img_metas'], outputs)
 
     print('Done!')
 
@@ -109,9 +115,9 @@ def main(args):
     cfg = Config.fromfile(args.config)
     for d in [cfg, cfg.data.test]:
         d.update(dict(report_speed=args.report_speed))
-    cfg.update(dict(vis=args.vis))
-    cfg.update(dict(debug=args.debug))
-    cfg.data.test.update(dict(debug=args.debug))
+#     cfg.update(dict(vis=args.vis))
+#     cfg.update(dict(debug=args.debug))
+#     cfg.data.test.update(dict(debug=args.debug))
     print(json.dumps(cfg._cfg_dict, indent=4))
 
     # data loader
@@ -158,11 +164,11 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Hyperparams')
-    parser.add_argument('config', help='config file path')
+    parser.add_argument('config', default='config/pan_pp/pan_pp_test.py', help='config file path')
     parser.add_argument('checkpoint', nargs='?', type=str, default=None)
     parser.add_argument('--report_speed', action='store_true')
-    parser.add_argument('--vis', action='store_true')
-    parser.add_argument('--debug', action='store_true')
+#     parser.add_argument('--vis', action='store_true')
+#     parser.add_argument('--debug', action='store_true')
     args = parser.parse_args()
-
+    args.checkpoint = './weights/doc_panpp_best_weight.pth.tar'
     main(args)
