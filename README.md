@@ -1,3 +1,31 @@
+# Speed Improvement of PAN++
+
+# Ver 1. (Conventional Version, Vanilla PAN++)
+
+||g0|g1|g2|g3|g4|Total|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|Time [ms]|34.647|355.830|1.874|985.164|0.007|1377.522|
+|Weight [%]|2.515|25.831|0.136|71.517|0.001|-|
+
+||s0|s1|s2|s3|Total|
+|:-:|:-:|:-:|:-:|:-:|:-:|
+|Time [ms]|2.800|336.512|7.402|2.780|349.495|
+|Weight [%]|0.801|96.285|2.118|0.796|-|
+
+# Ver 2. [(Update ./models/post_processing/pa/pa.pyx)](https://github.com/Zerohertz/pan_pp.pytorch/commit/795a066f2730a68b02443e4d3bdbb004b1d98046)
+
+||g0|g1|g2|g3|g4|Total|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|Time [ms]|35.272|270.528|1.678|994.205|0.008|1301.691|
+|Weight [%]|2.710|20.783|0.129|76.378|0.001|-|
+
+||s0|s1|s2|s3|Total|
+|:-:|:-:|:-:|:-:|:-:|:-:|
+|Time [ms]|2.420|256.450|7.560|2.807|269.277|
+|Weight [%]|0.900|95.236|2.807|1.057|-|
+
+---
+
 ## News
 - (2022/12/08) We will release the code and models of FAST in [link](https://github.com/czczup/FAST).
 - (2022/10/09) We release stabler code for PAN++, see [pan_pp_stable](https://github.com/whai362/pan_pp_stable).
