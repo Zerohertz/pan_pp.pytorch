@@ -7,10 +7,11 @@ import torch
 import torch.nn as nn
 
 from ..loss import build_loss, iou, ohem_batch
-from ..post_processing import pa
+from ..post_processing import pa, connectedComponents
 from ..utils import CoordConv2d
 
 import csv
+
 
 class PAN_PP_DetHead(nn.Module):
     def __init__(self,
@@ -88,10 +89,26 @@ class PAN_PP_DetHead(nn.Module):
         #####################################################################################################
         g1 = time.time()
         #####################################################################################################
-        label, l = pa(kernels, emb,
+        _, cc = cv2.connectedComponents(kernels[0], connectivity=4)
+        sss = time.time()
+        res = connectedComponents(kernels[1].astype(np.int32))
+        label_conn, area, inds, label_num, px, py = res
+        print('first cc: ', time.time() - sss)
+        ##############################################
+        p = np.zeros((label_num, 2), dtype=np.int32)
+        min_area = cfg.test_cfg.min_area / (cfg.test_cfg.scale**2)
+        
+        for i in range(1, label_num):
+            ind = inds[i]
+            if area[i] < min_area:
+#                 label_conn[ind] = 0
+                continue
+            p[i] = (px[i][0], py[i][0])
+        label, l = pa(kernels, emb, cc, label_num, label_conn, area, inds, p,
                    cfg.test_cfg.min_kernel_area / (cfg.test_cfg.scale**2))
         #####################################################################################################
         g1 = time.time() - g1
+        print('g1: ', g1)
         #####################################################################################################
         #####################################################################################################
         #####################################################################################################
@@ -105,7 +122,6 @@ class PAN_PP_DetHead(nn.Module):
         org_img_size = img_meta['org_img_size'][0]
         img_size = img_meta['img_size'][0]
 
-        label_num = np.max(label) + 1
         scale = (float(org_img_size[1]) / float(img_size[1]),
                  float(org_img_size[0]) / float(img_size[0]))
         label = cv2.resize(label, (img_size[1], img_size[0]),
@@ -124,14 +140,18 @@ class PAN_PP_DetHead(nn.Module):
         #####################################################################################################
         g3 = time.time()
         #####################################################################################################
+        sss = time.time()
+        res = connectedComponents(label)
+        label, area, inds, label_num, px, py = res
+        print('second cc: ', time.time() - sss)
+        ##############################################
         bboxes = []
         scores = []
         for i in range(1, label_num):
-            ind = label == i
-            points = np.array(np.where(ind)).transpose((1, 0))
+            ind = inds[i]
+            points = np.stack((px[i], py[i]), axis=1)
 
-            min_area = cfg.test_cfg.min_area / (cfg.test_cfg.scale**2)
-            if points.shape[0] < min_area:
+            if area[i] < min_area:
                 label[ind] = 0
                 continue
 
@@ -161,6 +181,7 @@ class PAN_PP_DetHead(nn.Module):
             scores.append(score_i)
         #####################################################################################################
         g3 = time.time() - g3
+        print('g3: ', g3)
         #####################################################################################################
         #####################################################################################################
         #####################################################################################################
@@ -168,6 +189,11 @@ class PAN_PP_DetHead(nn.Module):
         #####################################################################################################
         results['bboxes'] = bboxes
         results['scores'] = scores
+        results['kernels'] = kernels
+        results['emb'] = emb
+#         results['emb'] = emb
+#         results['emb'] = emb
+        
         if with_rec:
             results['label'] = label
             results['bboxes_h'] = bboxes_h
