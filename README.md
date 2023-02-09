@@ -2,10 +2,14 @@
 
 ## Ver 1. [(Conventional Version, Vanilla PAN++)](https://github.com/Zerohertz/pan_pp.pytorch/commit/02b70de62d8c9d58cd240e3b95cda82a16edf0b5)
 
+> [./models/head/pan_pp_det_head.py/PAN_PP_DetHead.get_results()](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/models/head/pan_pp_det_head.py)
+
 ||g0|g1|g2|g3|g4|Total|
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 |Time [ms]|34.647|355.830|1.874|985.164|0.007|1377.522|
 |Weight [%]|2.515|25.831|0.136|71.517|0.001|-|
+
+> [./models/post_processing/pa/pa.pyx/_pa()](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/models/post_processing/pa/pa.pyx)
 
 ||s0|s1|s2|s3|Total|
 |:-:|:-:|:-:|:-:|:-:|:-:|
@@ -14,10 +18,14 @@
 
 ## Ver 2. [(Update ./models/post_processing/pa/pa.pyx)](https://github.com/Zerohertz/pan_pp.pytorch/commit/795a066f2730a68b02443e4d3bdbb004b1d98046)
 
+> [./models/head/pan_pp_det_head.py/PAN_PP_DetHead.get_results()](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/models/head/pan_pp_det_head.py)
+
 ||g0|g1|g2|g3|g4|Total|
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 |Time [ms]|35.272|270.528|1.678|994.205|0.008|1301.691|
 |Weight [%]|2.710|20.783|0.129|76.378|0.001|-|
+
+> [./models/post_processing/pa/pa.pyx/_pa()](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/models/post_processing/pa/pa.pyx)
 
 ||s0|s1|s2|s3|Total|
 |:-:|:-:|:-:|:-:|:-:|:-:|
