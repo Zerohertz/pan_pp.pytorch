@@ -168,6 +168,10 @@ class PAN_PP_DetHead(nn.Module):
         #####################################################################################################
         results['bboxes'] = bboxes
         results['scores'] = scores
+        results['PA_kernels'] = kernels
+        results['PA_emb'] = emb
+        results['PA_img_size'] = img_size
+        results
         if with_rec:
             results['label'] = label
             results['bboxes_h'] = bboxes_h
