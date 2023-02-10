@@ -106,17 +106,24 @@ class PAN_PP_DetHead(nn.Module):
         img_size = img_meta['img_size'][0]
 
         label_num = np.max(label) + 1
-        scale = (float(org_img_size[1]) / float(img_size[1]),
-                 float(org_img_size[0]) / float(img_size[0]))
-        label = cv2.resize(label, (img_size[1], img_size[0]),
+#         scale = (float(org_img_size[1]) / float(img_size[1]), 
+#                  float(org_img_size[0]) / float(img_size[0]))
+        resize_const = 4
+        scale = np.array((float(org_img_size[1]) / float(img_size[1]), float(org_img_size[0]) / float(img_size[0])))
+        results['scale_org'] = scale
+        scale = scale*resize_const
+    ####################################################################
+        results['label_org'] = label
+        results['score_org'] = score
+        label = cv2.resize(label, (int(img_size[1]//resize_const), int(img_size[0]//resize_const)),
                            interpolation=cv2.INTER_NEAREST)
-        score = cv2.resize(score, (img_size[1], img_size[0]),
+        score = cv2.resize(score, (int(img_size[1]//resize_const), int(img_size[0]//resize_const)),
                            interpolation=cv2.INTER_NEAREST)
-
-        with_rec = hasattr(cfg.model, 'recognition_head')
-        if with_rec:
-            bboxes_h = np.zeros((1, label_num, 4), dtype=np.int32)
-            instances = [[]]
+        
+#         with_rec = hasattr(cfg.model, 'recognition_head')
+#         if with_rec:
+#             bboxes_h = np.zeros((1, label_num, 4), dtype=np.int32)
+#             instances = [[]]
         #####################################################################################################
         g2 = time.time() - g2
         #####################################################################################################
@@ -126,35 +133,44 @@ class PAN_PP_DetHead(nn.Module):
         #####################################################################################################
         bboxes = []
         scores = []
+        results['scale'] = scale
+        results['label'] = label
+        results['label_num'] = label_num
+        results['score'] = score
+        min_area = cfg.test_cfg.min_area / (cfg.test_cfg.scale**2)
         for i in range(1, label_num):
             ind = label == i
             points = np.array(np.where(ind)).transpose((1, 0))
 
-            min_area = cfg.test_cfg.min_area / (cfg.test_cfg.scale**2)
-            if points.shape[0] < min_area:
-                label[ind] = 0
-                continue
+#             if points.shape[0] < min_area:
+#                 label[ind] = 0
+#                 continue
 
             score_i = np.mean(score[ind])
             if score_i < cfg.test_cfg.min_score:
                 label[ind] = 0
                 continue
 
-            if with_rec:
-                tl = np.min(points, axis=0)
-                br = np.max(points, axis=0) + 1
-                bboxes_h[0, i] = (tl[0], tl[1], br[0], br[1])
-                instances[0].append(i)
+#             if with_rec:
+#                 tl = np.min(points, axis=0)
+#                 br = np.max(points, axis=0) + 1
+#                 bboxes_h[0, i] = (tl[0], tl[1], br[0], br[1])
+#                 instances[0].append(i)
 
             if cfg.test_cfg.bbox_type == 'rect':
-                rect = cv2.minAreaRect(points[:, ::-1])
-                bbox = cv2.boxPoints(rect) * scale
-            elif cfg.test_cfg.bbox_type == 'poly':
-                binary = np.zeros(label.shape, dtype='uint8')
-                binary[ind] = 1
-                contours, _ = cv2.findContours(binary, cv2.RETR_EXTERNAL,
-                                               cv2.CHAIN_APPROX_SIMPLE)
-                bbox = contours[0] * scale
+#                 rect = cv2.minAreaRect(points[:, ::-1])
+                pos, length, deg = cv2.minAreaRect(points[:, ::-1])
+                pos, length = np.array(pos), np.array(length)
+                pos -= 1
+                length += 2
+                pos, length = pos*scale, length*scale
+                bbox = cv2.boxPoints((pos, length, deg))
+#             elif cfg.test_cfg.bbox_type == 'poly':
+#                 binary = np.zeros(label.shape, dtype='uint8')
+#                 binary[ind] = 1
+#                 contours, _ = cv2.findContours(binary, cv2.RETR_EXTERNAL,
+#                                                cv2.CHAIN_APPROX_SIMPLE)
+#                 bbox = contours[0] * scale
 
             bbox = bbox.astype('int32')
             bboxes.append(bbox.reshape(-1))
@@ -168,14 +184,13 @@ class PAN_PP_DetHead(nn.Module):
         #####################################################################################################
         results['bboxes'] = bboxes
         results['scores'] = scores
-        results['PA_kernels'] = kernels
-        results['PA_emb'] = emb
-        results['PA_img_size'] = img_size
-        results
-        if with_rec:
-            results['label'] = label
-            results['bboxes_h'] = bboxes_h
-            results['instances'] = instances
+        results['kernels'] = kernels
+        results['emb'] = emb
+        results['img_size'] = img_size
+#         if with_rec:
+#             results['label'] = label
+#             results['bboxes_h'] = bboxes_h
+#             results['instances'] = instances
         #####################################################################################################
         g4 = time.time() - g4
         #####################################################################################################
