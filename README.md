@@ -32,12 +32,48 @@
 |Time [ms]|2.420|256.450|7.560|2.807|269.277|
 |Weight [%]|0.900|95.236|2.807|1.057|-|
 
+## Ver 3. [(Update ./models/head/pan_pp_det_head.get_results())](https://github.com/Zerohertz/pan_pp.pytorch/commit/e9ea507c091fdf1289df16184e4d30d911e9af4d)
+
+> [./models/head/pan_pp_det_head.py/PAN_PP_DetHead.get_results()](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/models/head/pan_pp_det_head.py)
+
+### `resize_const`: 4_0_0
+
+||g0|g1|g2|g3|g4|Total|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|Time [ms]|35.720|267.986|0.935|69.174|0.006|373.821|
+|Weight [%]|9.555|71.688|0.250|18.505|0.002|-|
+
+### `resize_const`: 4_0_1
+
+||g0|g1|g2|g3|g4|Total|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|Time [ms]|35.647|281.383|0.981|73.886|0.006|391.903|
+|Weight [%]|9.096|71.799|0.250|18.853|0.002|-|
+
+### `resize_const`: 4_0.1_1
+
+||g0|g1|g2|g3|g4|Total|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|Time [ms]|35.504|274.577|1.032|74.015|0.006|385.133|
+|Weight [%]|9.219|71.294|0.268|19.218|0.002|-|
+
+### `resize_const`: 2_0_0
+
+||g0|g1|g2|g3|g4|Total|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|Time [ms]|35.348|270.094|1.443|254.006|0.007|560.899|
+|Weight [%]|6.302|48.154|0.257|45.286|0.001|-|
+
+### `resize_const`: 2_0.1_1
+
+||g0|g1|g2|g3|g4|Total|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|Time [ms]|35.078|271.443|1.431|264.415|0.008|572.376|
+|Weight [%]|6.128|47.424|0.250|46.196|0.001|-|
+
 ## Performance
 
-||HMean [%]|Precision [%]|Recall [%]|
-|:-:|:-:|:-:|:-:|
-|Ver 1.|97.645|97.329|97.962|
-|Ver 2.|97.645|97.329|97.962|
+![Performance](./evaluation/test.png)
 
 ---
 
