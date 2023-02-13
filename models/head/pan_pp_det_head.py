@@ -64,6 +64,7 @@ class PAN_PP_DetHead(nn.Module):
     def get_results(self, out, img_meta, cfg):
         g0 = time.time()
         #####################################################################################################
+        resize_const, pos_const, len_const = map(float, cfg['resize_param'])
         results = {}
         if cfg.report_speed:
             torch.cuda.synchronize()
@@ -108,7 +109,6 @@ class PAN_PP_DetHead(nn.Module):
         label_num = np.max(label) + 1
 #         scale = (float(org_img_size[1]) / float(img_size[1]), 
 #                  float(org_img_size[0]) / float(img_size[0]))
-        resize_const = 2
         scale = np.array((float(org_img_size[1]) / float(img_size[1]), float(org_img_size[0]) / float(img_size[0])))
         results['scale_org'] = scale
         scale = scale*resize_const
@@ -160,8 +160,8 @@ class PAN_PP_DetHead(nn.Module):
 #                 rect = cv2.minAreaRect(points[:, ::-1])
                 pos, length, deg = cv2.minAreaRect(points[:, ::-1])
                 pos, length = np.array(pos), np.array(length)
-                pos += 0.1
-                length += 1
+                pos += pos_const
+                length += len_const
                 pos, length = pos*scale, length*scale
                 bbox = cv2.boxPoints((pos, length, deg))
 #             elif cfg.test_cfg.bbox_type == 'poly':
