@@ -8,8 +8,8 @@ sh compile.sh
 
 exe(){
     echo "resize_const: " ${resize_const}
-    echo "pos_const :" ${pos_const}
-    echo "len_const :" ${len_const}
+    echo "pos_const: " ${pos_const}
+    echo "len_const: " ${len_const}
 
     CUDA_VISIBLE_DEVICES=3 python test.py config/pan_pp/pan_pp_test.py --resize_const=$resize_const --pos_const=$pos_const --len_const=$len_const
 
