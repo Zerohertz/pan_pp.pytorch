@@ -42,6 +42,8 @@
 
 ![Performance_2](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/evaluation/Ver3_3.png)
 
+![Performance_2](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/evaluation/Ver3_4.png)
+
 ---
 
 ## News
