@@ -73,7 +73,7 @@
 
 ## Performance
 
-![Performance](https://user-images.githubusercontent.com/42334717/218047985-4b66758e-0324-4df5-a2de-f2dd02d2465c.png)
+![Performance](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/evaluation/test.png)
 
 ---
 
