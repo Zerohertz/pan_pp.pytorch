@@ -32,3 +32,5 @@ tmp/
 outputs*/
 ckpt_key_set.py
 .DS_Store
+
+*.csv
