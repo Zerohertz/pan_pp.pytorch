@@ -108,11 +108,10 @@ class PAN_PP_DetHead(nn.Module):
         label_num = np.max(label) + 1
 #         scale = (float(org_img_size[1]) / float(img_size[1]), 
 #                  float(org_img_size[0]) / float(img_size[0]))
-        resize_const = 4
+        resize_const = 2
         scale = np.array((float(org_img_size[1]) / float(img_size[1]), float(org_img_size[0]) / float(img_size[0])))
         results['scale_org'] = scale
         scale = scale*resize_const
-    ####################################################################
         results['label_org'] = label
         results['score_org'] = score
         label = cv2.resize(label, (int(img_size[1]//resize_const), int(img_size[0]//resize_const)),
@@ -161,8 +160,8 @@ class PAN_PP_DetHead(nn.Module):
 #                 rect = cv2.minAreaRect(points[:, ::-1])
                 pos, length, deg = cv2.minAreaRect(points[:, ::-1])
                 pos, length = np.array(pos), np.array(length)
-                pos -= 1
-                length += 2
+                pos += 0.1
+                length += 1
                 pos, length = pos*scale, length*scale
                 bbox = cv2.boxPoints((pos, length, deg))
 #             elif cfg.test_cfg.bbox_type == 'poly':
