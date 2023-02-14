@@ -32,17 +32,25 @@
 |Time [ms]|2.420|256.450|7.560|2.807|269.277|
 |Weight [%]|0.900|95.236|2.807|1.057|-|
 
-![Performance_1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/evaluation/Ver_Base.png)
+![Performance_1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/2-4_0-0.2_0-1/Ver3_Base.png)
 
 ## Ver 3. [(Update ./models/head/pan_pp_det_head.get_results())](https://github.com/Zerohertz/pan_pp.pytorch/commit/e9ea507c091fdf1289df16184e4d30d911e9af4d)
 
 > [./models/head/pan_pp_det_head.py/PAN_PP_DetHead.get_results()](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/models/head/pan_pp_det_head.py)
 
-![Performance_2](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/evaluation/Ver3_2.png)
+## [Full factorial design: No. 1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/2-4_0-0.2_0-1/test_ff.sh)
 
-![Performance_2](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/evaluation/Ver3_3.png)
+![Performance_2](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/2-4_0-0.2_0-1/Ver3_2.png)
 
-![Performance_2](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/evaluation/Ver3_4.png)
+![Performance_3](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/2-4_0-0.2_0-1/Ver3_3.png)
+
+![Performance_4](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/2-4_0-0.2_0-1/Ver3_4.png)
+
+![Performance_5](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/2-4_0-0.2_0-1/pos_const.png)
+
+![Performance_6](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/2-4_0-0.2_0-1/len_const.png)
+
+![Performance_7](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/2-4_0-0.2_0-1/Ver3_resize_const.png)
 
 ---
 
