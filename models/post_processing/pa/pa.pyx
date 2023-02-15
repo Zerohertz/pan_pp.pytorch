@@ -7,10 +7,13 @@ cimport libcpp
 cimport libcpp.pair
 cimport libcpp.queue
 from libcpp.pair cimport *
-from libcpp.queue  cimport *
+from libcpp.queue cimport *
+
+from cython.parallel import prange
 
 import time
 import csv
+
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
@@ -35,9 +38,6 @@ cdef np.ndarray[np.int32_t, ndim=2] _pa(np.ndarray[np.uint8_t, ndim=3] kernels,
     cdef np.float32_t max_rate = 1024
     cdef int i, j, tmp
     
-    px = [np.zeros((0,), dtype=np.int32) for _ in range(label_num)]
-    py = [np.zeros((0,), dtype=np.int32) for _ in range(label_num)]
-    
     for i in range(label.shape[0]):
         for j in range(label.shape[1]):
             tmp = label[i][j]
@@ -49,15 +49,14 @@ cdef np.ndarray[np.int32_t, ndim=2] _pa(np.ndarray[np.uint8_t, ndim=3] kernels,
                     area[tmp] = 1
                 else:
                     area[tmp] += 1
-                px[tmp] = np.append(px[tmp], i)
-                py[tmp] = np.append(py[tmp], j)
+                if p[tmp][0] == 0 and p[tmp][1] == 0:
+                    p[tmp][0] = i
+                    p[tmp][1] = j
 
     for i in range(1, label_num):
-        ind = inds[i]
         if area[i] < min_area:
-            label[ind] = 0
+            label[inds[i]] = 0
             continue
-        p[i] = (px[i][0], py[i][0])
         for j in range(1, i):
             if area[j] < min_area:
                 continue
@@ -66,8 +65,7 @@ cdef np.ndarray[np.int32_t, ndim=2] _pa(np.ndarray[np.uint8_t, ndim=3] kernels,
             rate = area[i] / area[j]
             if rate < 1 / max_rate or rate > max_rate:
                 flag[i] = 1
-                mean_emb[i] = np.mean(emb[:, ind], axis=1)
-
+                mean_emb[i] = np.mean(emb[:, inds[i]], axis=1)
                 if flag[j] == 0:
                     flag[j] = 1
                     mean_emb[j] = np.mean(emb[:, inds[j].astype(np.bool)], axis=1)
