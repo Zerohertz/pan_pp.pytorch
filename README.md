@@ -77,6 +77,15 @@
     </div>
 </details>
 
+## Ver 5. [(Add: ./models/post_processing/boxgen/boxgen.pyx)](https://github.com/Zerohertz/pan_pp.pytorch/commit/233bf1dadb73673d255abb4ce5f3a86cd63636b6)
+
+<details>
+    <summary>Result</summary>
+    <div>
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver5_ORG/Ver5.png">
+    </div>
+</details>
+
 ---
 
 ## News
