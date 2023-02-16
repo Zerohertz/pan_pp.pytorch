@@ -38,19 +38,30 @@
 
 > [./models/head/pan_pp_det_head.py/PAN_PP_DetHead.get_results()](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/models/head/pan_pp_det_head.py)
 
-## [Full factorial design: No. 1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/2-4_0-0.2_0-1/test_ff.sh)
+## [Full factorial design: Experiment 1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/2-4_0-0.2_0-1/test_ff.sh)
 
-![Performance_2](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/1_2-4_0-0.2_0-1/Ver3_2.png)
+<details>
+    <summary>Result</summary>
+    <div>
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/1_2-4_0-0.2_0-1/Ver3_2.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/1_2-4_0-0.2_0-1/Ver3_3.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/1_2-4_0-0.2_0-1/Ver3_4.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/1_2-4_0-0.2_0-1/pos_const.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/1_2-4_0-0.2_0-1/len_const.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/1_2-4_0-0.2_0-1/Ver3_resize_const.png">
+    </div>
+</details>
 
-![Performance_3](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/1_2-4_0-0.2_0-1/Ver3_3.png)
+## [Full factorial design: Experiment 2](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/2_2_0.2-0.3_0.4-0.6/test_ff.sh)
 
-![Performance_4](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/1_2-4_0-0.2_0-1/Ver3_4.png)
-
-![Performance_5](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/1_2-4_0-0.2_0-1/pos_const.png)
-
-![Performance_6](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/1_2-4_0-0.2_0-1/len_const.png)
-
-![Performance_7](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/1_2-4_0-0.2_0-1/Ver3_resize_const.png)
+<details>
+    <summary>Result</summary>
+    <div>
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/2_2_0.2-0.3_0.4-0.6/Ver3_2.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/2_2_0.2-0.3_0.4-0.6/len_const.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/2_2_0.2-0.3_0.4-0.6/pos_const.png">
+    </div>
+</details>
 
 ---
 
