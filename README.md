@@ -32,7 +32,12 @@
 |Time [ms]|2.420|256.450|7.560|2.807|269.277|
 |Weight [%]|0.900|95.236|2.807|1.057|-|
 
-![Performance_1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_Base.png)
+<details>
+    <summary>Result</summary>
+    <div>
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_Base.png">
+    </div>
+</details>
 
 ## Ver 3. [(Update: ./models/head/pan_pp_det_head.get_results())](https://github.com/Zerohertz/pan_pp.pytorch/commit/e9ea507c091fdf1289df16184e4d30d911e9af4d)
 
