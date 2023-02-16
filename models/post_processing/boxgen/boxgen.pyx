@@ -19,7 +19,7 @@ cdef np.ndarray[np.int32_t, ndim=2] _boxgen(np.ndarray[np.int32_t, ndim=2] label
     W = label.shape[0]
     H = label.shape[1]
     cdef np.ndarray[np.uint8_t, ndim=3] inds = np.zeros((label_num, W, H), dtype=np.bool)
-    cdef np.ndarray[np.int32_t, ndim=1] area = np.full(label_num, -1, dtype=np.int32)
+    cdef np.ndarray[np.float32_t, ndim=1] area = np.full(label_num, -1, dtype=np.float32)
     cdef np.ndarray[np.float32_t, ndim=1] score_i = np.full(label_num, -1, dtype=np.float32)
     cdef np.ndarray[np.int32_t, ndim=2] points = np.full((W*H, 3), label_num + 1, dtype=np.int32)
     cdef np.ndarray[np.int32_t, ndim=2] points_New = np.full((W*H, 2), label_num + 1, dtype=np.int32)
@@ -27,7 +27,7 @@ cdef np.ndarray[np.int32_t, ndim=2] _boxgen(np.ndarray[np.int32_t, ndim=2] label
     cdef np.ndarray[np.float32_t, ndim=1] pos = np.zeros(2, dtype=np.float32)
     cdef np.ndarray[np.float32_t, ndim=1] length = np.zeros(2, dtype=np.float32)
     cdef np.ndarray[np.int32_t, ndim=3] bboxes = np.zeros((0, 4, 2), dtype=np.int32)
-    cdef int i, j, tmp
+    cdef int i, j, tmp, idx
     cdef float deg
     cdef tuple pos_t, length_t
     
@@ -39,11 +39,11 @@ cdef np.ndarray[np.int32_t, ndim=2] _boxgen(np.ndarray[np.int32_t, ndim=2] label
                 continue
             else:
                 inds[tmp][i][j] = True
-                if area[tmp] == -1:
-                    area[tmp] = 1
+                if area[tmp] < 0:
+                    area[tmp] = 1.0
                     score_i[tmp] = score[i][j]
                 else:
-                    area[tmp] += 1
+                    area[tmp] += 1.0
                     score_i[tmp] += score[i][j]
             points[i+W*j] = np.array((tmp, i, j), dtype=np.int32)
 
@@ -53,17 +53,18 @@ cdef np.ndarray[np.int32_t, ndim=2] _boxgen(np.ndarray[np.int32_t, ndim=2] label
     tmp = 0
 #     print(label_num, area.sum()) -> (272, 97927)
     for i in range(1, label_num):
+        idx = int(area[i])
         if area[i] < min_area:
-            tmp += area[i]
+            tmp += int(area[i])
             label[inds[i]] = 0
             continue
 
         if score_i[i] / area[i] < min_score:
-            tmp += area[i]
+            tmp += int(area[i])
             label[inds[i]] = 0
             continue
         
-        pos_t, length_t, deg = cv2.minAreaRect(points_New[tmp:tmp+area[i]][:, ::-1])
+        pos_t, length_t, deg = cv2.minAreaRect(points_New[tmp:tmp+idx][:, ::-1])
 #         if 45 < deg <= 135:
 #             deg = 90
 #         elif -45 <= deg <= 45:
@@ -78,7 +79,7 @@ cdef np.ndarray[np.int32_t, ndim=2] _boxgen(np.ndarray[np.int32_t, ndim=2] label
         pos, length = pos*scale, length*scale
         bbox = cv2.boxPoints((pos, length, deg))
         bboxes = np.append(bboxes, bbox.astype('int32').reshape(1, 4, 2), axis=0)
-        tmp += area[i]
+        tmp += int(area[i])
     return bboxes
 
 def boxgen(label, score, label_num, min_area, min_score, scale, pos_const, len_const):
