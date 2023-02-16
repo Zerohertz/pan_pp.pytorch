@@ -3,11 +3,6 @@ import cv2
 import torch
 cimport numpy as np
 cimport cython
-cimport libcpp
-cimport libcpp.pair
-cimport libcpp.queue
-from libcpp.pair cimport *
-from libcpp.queue cimport *
 
 # from cython.parallel import prange
 
@@ -54,16 +49,17 @@ cdef np.ndarray[np.int32_t, ndim=2] _boxgen(np.ndarray[np.int32_t, ndim=2] label
                     area[tmp] += 1
                     score_i[tmp] += score[i][j]
             points[i+W*j] = np.array((tmp, i, j), dtype=np.int32)
+    
     points_idx = np.argsort(points, axis=0)[:, 0].astype('int32')
     points = points[points_idx][:, 1:3]
     tmp = 0
+    
     for i in range(1, label_num):
         if area[i] < min_area:
             tmp += area[i]
             label[inds[i]] = 0
             continue
-            
-#         score_i = np.mean(score[inds[i]])
+
         if score_i[i] / area[i] < min_score:
             tmp += area[i]
             label[inds[i]] = 0
