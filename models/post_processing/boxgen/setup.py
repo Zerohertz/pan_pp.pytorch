@@ -11,4 +11,4 @@ setup(ext_modules=cythonize(
               library_dirs=[],
               libraries=[],
               extra_compile_args=['-O3'],
-              extra_link_args=[])))
+              extra_link_args=[]),))

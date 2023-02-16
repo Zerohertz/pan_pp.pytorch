@@ -4,11 +4,6 @@ import torch
 cimport numpy as np
 cimport cython
 
-# from cython.parallel import prange
-
-import time
-import csv
-
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
@@ -27,14 +22,16 @@ cdef np.ndarray[np.int32_t, ndim=2] _boxgen(np.ndarray[np.int32_t, ndim=2] label
     cdef np.ndarray[np.int32_t, ndim=1] area = np.full(label_num, -1, dtype=np.int32)
     cdef np.ndarray[np.float32_t, ndim=1] score_i = np.full(label_num, -1, dtype=np.float32)
     cdef np.ndarray[np.int32_t, ndim=2] points = np.full((W*H, 3), label_num + 1, dtype=np.int32)
+    cdef np.ndarray[np.int32_t, ndim=2] points_New = np.full((W*H, 2), label_num + 1, dtype=np.int32)
     cdef np.ndarray[np.int32_t, ndim=1] points_idx = np.zeros(W*H, dtype=np.int32)
     cdef np.ndarray[np.float32_t, ndim=1] pos = np.zeros(2, dtype=np.float32)
     cdef np.ndarray[np.float32_t, ndim=1] length = np.zeros(2, dtype=np.float32)
     cdef np.ndarray[np.int32_t, ndim=3] bboxes = np.zeros((0, 4, 2), dtype=np.int32)
     cdef int i, j, tmp
     cdef float deg
-    cdef tuple pos_t, length_t ###
+    cdef tuple pos_t, length_t
     
+#     print(W*H) -> 376832
     for i in range(W):
         for j in range(H):
             tmp = label[i][j]
@@ -49,11 +46,12 @@ cdef np.ndarray[np.int32_t, ndim=2] _boxgen(np.ndarray[np.int32_t, ndim=2] label
                     area[tmp] += 1
                     score_i[tmp] += score[i][j]
             points[i+W*j] = np.array((tmp, i, j), dtype=np.int32)
-    
+
     points_idx = np.argsort(points, axis=0)[:, 0].astype('int32')
-    points = points[points_idx][:, 1:3]
-    tmp = 0
+    points_New = points[points_idx][:, 1:3]
     
+    tmp = 0
+#     print(label_num, area.sum()) -> (272, 97927)
     for i in range(1, label_num):
         if area[i] < min_area:
             tmp += area[i]
@@ -65,7 +63,7 @@ cdef np.ndarray[np.int32_t, ndim=2] _boxgen(np.ndarray[np.int32_t, ndim=2] label
             label[inds[i]] = 0
             continue
         
-        pos_t, length_t, deg = cv2.minAreaRect(points[tmp:tmp+area[i]][:, ::-1])
+        pos_t, length_t, deg = cv2.minAreaRect(points_New[tmp:tmp+area[i]][:, ::-1])
 #         if 45 < deg <= 135:
 #             deg = 90
 #         elif -45 <= deg <= 45:
