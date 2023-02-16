@@ -63,6 +63,15 @@
     </div>
 </details>
 
+## Ver 4. [(Update: ./models/post_processing/pa/pa.pyx)](https://github.com/Zerohertz/pan_pp.pytorch/commit/7127027bb90084bf49856aef0295409b6744518e)
+
+<details>
+    <summary>Result</summary>
+    <div>
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver4_ORG/Ver4.png">
+    </div>
+</details>
+
 ---
 
 ## News
