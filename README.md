@@ -91,10 +91,11 @@
 <details open>
 <summary>Update</summary>
 
-- <a href='https://github.com/Zerohertz/pan_pp.pytorch/commit/dd64dc0c6db19044da24cd558f49849628278b3d'>Update: Pixel Aggregation</a>
-- <a href='https://github.com/Zerohertz/pan_pp.pytorch/commit/0253553cf856db87856fab3e904aba462e54719c'>Update: Boxgen</a>
-- <a href='https://github.com/Zerohertz/pan_pp.pytorch/commit/2fcae8ab733a63be1a38e47a577819a74d821d0c'>Update: Boxgen</a>
+- <a href='https://github.com/Zerohertz/pan_pp.pytorch/commit/dd64dc0c6db19044da24cd558f49849628278b3d'>Pixel Aggregation</a>
+- <a href='https://github.com/Zerohertz/pan_pp.pytorch/commit/2fcae8ab733a63be1a38e47a577819a74d821d0c'>Boxgen</a>
 </details>
+
+### [Full factorial design: Experiment 1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2_0.2-0.3_0.4-0.6/test_ff.sh)
 
 <details>
     <summary>Result</summary>
