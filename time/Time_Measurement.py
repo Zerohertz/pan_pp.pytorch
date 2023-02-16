@@ -11,4 +11,4 @@ for i in os.listdir():
         tot = 0
         with open('./time.csv', 'a', encoding='utf8') as f:
             wr = csv.writer(f)
-            wr.writerow([i[0:-4], data[0].mean()*1000, data[5].mean()*1000, data[6].mean()*1000, data[7].mean()*1000, data[8].mean()*1000])
+            wr.writerow([i[0:-4], data[0].mean()*1000, data[1].mean()*1000, data[2].mean()*1000, data[3].mean()*1000, data[4].mean()*1000])
