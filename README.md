@@ -16,7 +16,7 @@
 |Time [ms]|2.800|336.512|7.402|2.780|349.495|
 |Weight [%]|0.801|96.285|2.118|0.796|-|
 
-## Ver 2. [(Update ./models/post_processing/pa/pa.pyx)](https://github.com/Zerohertz/pan_pp.pytorch/commit/795a066f2730a68b02443e4d3bdbb004b1d98046)
+## Ver 2. [(Update: ./models/post_processing/pa/pa.pyx)](https://github.com/Zerohertz/pan_pp.pytorch/commit/795a066f2730a68b02443e4d3bdbb004b1d98046)
 
 > [./models/head/pan_pp_det_head.py/PAN_PP_DetHead.get_results()](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/models/head/pan_pp_det_head.py)
 
@@ -32,34 +32,34 @@
 |Time [ms]|2.420|256.450|7.560|2.807|269.277|
 |Weight [%]|0.900|95.236|2.807|1.057|-|
 
-![Performance_1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/1_2-4_0-0.2_0-1/Ver3_Base.png)
+![Performance_1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_Base.png)
 
-## Ver 3. [(Update ./models/head/pan_pp_det_head.get_results())](https://github.com/Zerohertz/pan_pp.pytorch/commit/e9ea507c091fdf1289df16184e4d30d911e9af4d)
+## Ver 3. [(Update: ./models/head/pan_pp_det_head.get_results())](https://github.com/Zerohertz/pan_pp.pytorch/commit/e9ea507c091fdf1289df16184e4d30d911e9af4d)
 
 > [./models/head/pan_pp_det_head.py/PAN_PP_DetHead.get_results()](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/models/head/pan_pp_det_head.py)
 
-## [Full factorial design: Experiment 1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/2-4_0-0.2_0-1/test_ff.sh)
+### [Full factorial design: Experiment 1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/test_ff.sh)
 
 <details>
     <summary>Result</summary>
     <div>
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/1_2-4_0-0.2_0-1/Ver3_2.png">
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/1_2-4_0-0.2_0-1/Ver3_3.png">
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/1_2-4_0-0.2_0-1/Ver3_4.png">
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/1_2-4_0-0.2_0-1/pos_const.png">
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/1_2-4_0-0.2_0-1/len_const.png">
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/1_2-4_0-0.2_0-1/Ver3_resize_const.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_2.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_3.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_4.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/pos_const.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/len_const.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_resize_const.png">
     </div>
 </details>
 
-## [Full factorial design: Experiment 2](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/2_2_0.2-0.3_0.4-0.6/test_ff.sh)
+### [Full factorial design: Experiment 2](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_2_2_0.2-0.3_0.4-0.6/test_ff.sh)
 
 <details>
     <summary>Result</summary>
     <div>
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/2_2_0.2-0.3_0.4-0.6/Ver3_2.png">
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/2_2_0.2-0.3_0.4-0.6/len_const.png">
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/2_2_0.2-0.3_0.4-0.6/pos_const.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_2_2_0.2-0.3_0.4-0.6/Ver3_2.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_2_2_0.2-0.3_0.4-0.6/len_const.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_2_2_0.2-0.3_0.4-0.6/pos_const.png">
     </div>
 </details>
 
