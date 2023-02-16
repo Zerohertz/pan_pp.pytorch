@@ -89,7 +89,7 @@ class PAN_PP_DetHead(nn.Module):
         #####################################################################################################
         g1 = time.time()
         #####################################################################################################
-        label, l = pa(kernels, emb,
+        label = pa(kernels, emb,
                    cfg.test_cfg.min_kernel_area / (cfg.test_cfg.scale**2))
         #####################################################################################################
         g1 = time.time() - g1
@@ -129,9 +129,8 @@ class PAN_PP_DetHead(nn.Module):
         g4 = time.time() - g4
         #####################################################################################################
         with open('./time/tmp.csv', 'a', encoding='utf8') as f:
-            s0, s1, s2, s3 = l
             wr = csv.writer(f)
-            wr.writerow([g0, s0, s1, s2, s3, g1, g2, g3, g4])
+            wr.writerow([g0, g1, g2, g3, g4])
         return results
 
     def loss(self, out, gt_texts, gt_kernels, training_masks, gt_instances,
