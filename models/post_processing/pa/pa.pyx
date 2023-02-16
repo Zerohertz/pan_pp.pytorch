@@ -19,17 +19,21 @@ cdef np.ndarray[np.int32_t, ndim=2] _pa(np.ndarray[np.uint8_t, ndim=3] kernels,
                                         int kernel_num,
                                         int label_num,
                                         float min_area=0):
-    cdef np.ndarray[np.int32_t, ndim=2] pred = np.zeros((label.shape[0], label.shape[1]), dtype=np.int32)
+    cdef int H, W
+    H = label.shape[0]
+    W = label.shape[1]
+    cdef np.ndarray[np.int32_t, ndim=2] pred = np.zeros((H, W), dtype=np.int32)
     cdef np.ndarray[np.float32_t, ndim=2] mean_emb = np.zeros((label_num, 4), dtype=np.float32)
     cdef np.ndarray[np.float32_t, ndim=1] area = np.full((label_num,), -1, dtype=np.float32)
     cdef np.ndarray[np.int32_t, ndim=1] flag = np.zeros((label_num,), dtype=np.int32)
-    cdef np.ndarray[np.uint8_t, ndim=3] inds = np.zeros((label_num, label.shape[0], label.shape[1]), dtype=np.bool)
+    cdef np.ndarray[np.uint8_t, ndim=3] inds = np.zeros((label_num, H, W), dtype=np.bool)
     cdef np.ndarray[np.int32_t, ndim=2] p = np.zeros((label_num, 2), dtype=np.int32)
     cdef np.float32_t max_rate = 1024
     cdef int i, j, tmp
     
-    for i in range(label.shape[0]):
-        for j in range(label.shape[1]):
+#     print(H*W) -> 376832
+    for i in range(H):
+        for j in range(W):
             tmp = label[i][j]
             if tmp == 0:
                 continue
@@ -42,7 +46,7 @@ cdef np.ndarray[np.int32_t, ndim=2] _pa(np.ndarray[np.uint8_t, ndim=3] kernels,
                 if p[tmp][0] == 0 and p[tmp][1] == 0:
                     p[tmp][0] = i
                     p[tmp][1] = j
-
+    
     for i in range(1, label_num):
         if area[i] < min_area:
             label[inds[i]] = 0
@@ -67,13 +71,13 @@ cdef np.ndarray[np.int32_t, ndim=2] _pa(np.ndarray[np.uint8_t, ndim=3] kernels,
     cdef np.int16_t*dx = [-1, 1, 0, 0]
     cdef np.int16_t*dy = [0, 0, -1, 1]
     cdef np.int16_t tmpx, tmpy
-
+    
     points = np.array(np.where(label > 0)).transpose((1, 0))
     for point_idx in range(points.shape[0]):
         tmpx, tmpy = points[point_idx, 0], points[point_idx, 1]
         que.push(pair[np.int16_t, np.int16_t](tmpx, tmpy))
         pred[tmpx, tmpy] = label[tmpx, tmpy]
-
+    
     cdef libcpp.pair.pair[np.int16_t, np.int16_t] cur
     cdef int cur_label
     for kernel_idx in range(kernel_num - 2, -1, -1):
