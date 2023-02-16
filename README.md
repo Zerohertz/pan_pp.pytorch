@@ -63,8 +63,8 @@
     <summary>Result</summary>
     <div>
         <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_2_2_0.2-0.3_0.4-0.6/Ver3_2.png">
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_2_2_0.2-0.3_0.4-0.6/len_const.png">
         <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_2_2_0.2-0.3_0.4-0.6/pos_const.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_2_2_0.2-0.3_0.4-0.6/len_const.png">
     </div>
 </details>
 
