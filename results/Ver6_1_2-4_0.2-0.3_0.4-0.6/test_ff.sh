@@ -22,7 +22,7 @@ exe(){
     cd ..
 }
 
-for rc in '2'
+for rc in '2' '3' '4'
 do
     for pc in '0.2' '0.25' '0.3'
     do
