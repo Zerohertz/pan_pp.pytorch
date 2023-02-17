@@ -100,10 +100,10 @@
 <details>
     <summary>Result</summary>
     <div>
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2_0.2-0.3_0.4-0.6/Ver6_Base.png">
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2_0.2-0.3_0.4-0.6/Ver6_2.png">
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2_0.2-0.3_0.4-0.6/pos_const.png">
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2_0.2-0.3_0.4-0.6/len_const.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2-4_0.2-0.3_0.4-0.6/Ver6_Base.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2-4_0.2-0.3_0.4-0.6/Ver6_2.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2-4_0.2-0.3_0.4-0.6/pos_const.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2-4_0.2-0.3_0.4-0.6/len_const.png">
     </div>
 </details>
 
