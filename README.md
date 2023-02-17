@@ -39,9 +39,14 @@
     </div>
 </details>
 
-## Ver 3. [(Update: ./models/head/pan_pp_det_head.get_results())](https://github.com/Zerohertz/pan_pp.pytorch/commit/e9ea507c091fdf1289df16184e4d30d911e9af4d)
+## Ver 3. (Update: ./models/head/pan_pp_det_head.get_results())
 
-> [./models/head/pan_pp_det_head.py/PAN_PP_DetHead.get_results()](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/models/head/pan_pp_det_head.py)
+<details open>
+<summary>Update</summary>
+
+- <a href='https://github.com/Zerohertz/pan_pp.pytorch/commit/e9ea507c091fdf1289df16184e4d30d911e9af4d'>Post-processing</a>
+- <a href='https://github.com/Zerohertz/pan_pp.pytorch/commit/67c6aade111dd45e35be720f2b2c12319a83824c'>Pixel Aggregation</a>
+</details>
 
 ### [Full factorial design: Experiment 1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/test_ff.sh)
 
