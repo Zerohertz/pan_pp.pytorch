@@ -39,13 +39,13 @@
     </div>
 </details>
 
-## Ver 3. (Update: ./models/head/pan_pp_det_head.get_results())
+## Ver 3. (Add: `resize_const`, `pos_const`, `len_const`)
 
 <details open>
 <summary>Update</summary>
 
-- <a href='https://github.com/Zerohertz/pan_pp.pytorch/commit/e9ea507c091fdf1289df16184e4d30d911e9af4d'>Post-processing</a>
-- <a href='https://github.com/Zerohertz/pan_pp.pytorch/commit/67c6aade111dd45e35be720f2b2c12319a83824c'>Pixel Aggregation</a>
+- <a href='https://github.com/Zerohertz/pan_pp.pytorch/commit/e9ea507c091fdf1289df16184e4d30d911e9af4d'>resize_const, pos_const, len_const</a>
+- <a href='https://github.com/Zerohertz/pan_pp.pytorch/commit/67c6aade111dd45e35be720f2b2c12319a83824c'>Full Factorial Design</a>
 </details>
 
 ### [Full factorial design: Experiment 1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/test_ff.sh)
