@@ -3,6 +3,7 @@ import cv2
 import torch
 cimport numpy as np
 cimport cython
+from cython.parallel import prange
 
 
 @cython.boundscheck(False)
@@ -22,7 +23,6 @@ cdef np.ndarray[np.int32_t, ndim=2] _boxgen(np.ndarray[np.int32_t, ndim=2] label
     cdef np.ndarray[np.float32_t, ndim=1] area = np.full(label_num, -1, dtype=np.float32)
     cdef np.ndarray[np.float32_t, ndim=1] score_i = np.full(label_num, -1, dtype=np.float32)
     cdef np.ndarray[np.int32_t, ndim=2] points = np.full((H*W, 3), label_num + 1, dtype=np.int32)
-    cdef np.ndarray[np.int32_t, ndim=1] tmp_points = np.zeros(3, dtype=np.int32)
     cdef np.ndarray[np.int32_t, ndim=2] points_New = np.full((H*W, 2), label_num + 1, dtype=np.int32)
     cdef np.ndarray[np.int32_t, ndim=1] points_idx = np.zeros(H*W, dtype=np.int32)
     cdef np.ndarray[np.float32_t, ndim=1] pos = np.zeros(2, dtype=np.float32)
@@ -33,23 +33,23 @@ cdef np.ndarray[np.int32_t, ndim=2] _boxgen(np.ndarray[np.int32_t, ndim=2] label
     cdef tuple pos_t, length_t
     
 #     print(H*W) -> 376832
-    for i in range(H):
+    for i in prange(H, nogil=True):
         for j in range(W):
-            tmp = label[i][j]
+            tmp = label[i, j]
             if tmp == 0:
                 continue
             else:
-                inds[tmp][i][j] = True
+                inds[tmp, i, j] = True
                 if area[tmp] < 0:
                     area[tmp] = 1.0
-                    score_i[tmp] = score[i][j]
+                    score_i[tmp] = score[i, j]
                 else:
                     area[tmp] += 1.0
-                    score_i[tmp] += score[i][j]
-            tmp_points[0] = tmp
-            tmp_points[1] = i
-            tmp_points[2] = j
-            points[i+H*j] = tmp_points
+                    score_i[tmp] += score[i, j]
+            idx = i+H*j
+            points[idx, 0] = tmp
+            points[idx, 1] = i
+            points[idx, 2] = j
 
     points_idx = np.argsort(points, axis=0)[:, 0].astype('int32')
     points_New = points[points_idx][:, 1:3]
