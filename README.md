@@ -121,9 +121,18 @@
     </div>
 </details>
 
+## Ver 8. [(Update: ./models/post_processing/)](https://github.com/Zerohertz/pan_pp.pytorch/commit/f3601b043948de1b3496295d87ea92e621f827bb)
+
+<details>
+    <summary>Result</summary>
+    <div>
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver8_2_0.2_0.5/Ver8_Base.png">
+    </div>
+</details>
+
 # Conclusion
 
-![Conclusion 1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver7_2_0.2_0.5/Result.png)
+![Conclusion 1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver8_2_0.2_0.5/Result.png)
 
 ---
 
