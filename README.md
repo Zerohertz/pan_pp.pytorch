@@ -123,8 +123,7 @@
 
 # Conclusion
 
-![Conclusion 1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2-4_0.2-0.3_0.4-0.6/Results_1.png)
-![Conclusion 2](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2-4_0.2-0.3_0.4-0.6/Results_2.png)
+![Conclusion 1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver7_2_0.2_0.5/Result.png)
 
 ---
 
