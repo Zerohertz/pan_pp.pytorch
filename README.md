@@ -78,7 +78,7 @@
 <details>
     <summary>Result</summary>
     <div>
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver4_ORG/Ver4.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver4_2_0.2_0.5/Ver4.png">
     </div>
 </details>
 
@@ -87,7 +87,7 @@
 <details>
     <summary>Result</summary>
     <div>
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver5_ORG/Ver5.png">
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver5_2_0.2_0.5/Ver5.png">
     </div>
 </details>
 
@@ -109,6 +109,15 @@
         <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2-4_0.2-0.3_0.4-0.6/Ver6_2.png">
         <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2-4_0.2-0.3_0.4-0.6/pos_const.png">
         <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2-4_0.2-0.3_0.4-0.6/len_const.png">
+    </div>
+</details>
+
+## Ver 7. [(Update: ./models/post_processing/boxgen/boxgen.pyx)](https://github.com/Zerohertz/pan_pp.pytorch/commit/ca252f6b581878fa735a414c168e09522b97c171)
+
+<details>
+    <summary>Result</summary>
+    <div>
+        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver7_2_0.2_0.5/Ver7_Base.png">
     </div>
 </details>
 
