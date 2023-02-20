@@ -18,6 +18,10 @@
 
 ## Ver 2. [(Update: ./models/post_processing/pa/pa.pyx)](https://github.com/Zerohertz/pan_pp.pytorch/commit/795a066f2730a68b02443e4d3bdbb004b1d98046)
 
+<details>
+<summary>Read more</summary>
+<div>
+
 > [./models/head/pan_pp_det_head.py/PAN_PP_DetHead.get_results()](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/models/head/pan_pp_det_head.py)
 
 ||g0|g1|g2|g3|g4|Total|
@@ -32,98 +36,93 @@
 |Time [ms]|2.420|256.450|7.560|2.807|269.277|
 |Weight [%]|0.900|95.236|2.807|1.057|-|
 
-<details>
-    <summary>Result</summary>
-    <div>
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_Base.png">
-    </div>
+<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_Base.png">
+
+</div>
 </details>
 
 ## Ver 3. (Add: `resize_const`, `pos_const`, `len_const`)
 
-<details open>
-<summary>Update</summary>
+<details>
+<summary>Read more</summary>
+<div>
 
 - <a href='https://github.com/Zerohertz/pan_pp.pytorch/commit/e9ea507c091fdf1289df16184e4d30d911e9af4d'>resize_const, pos_const, len_const</a>
 - <a href='https://github.com/Zerohertz/pan_pp.pytorch/commit/67c6aade111dd45e35be720f2b2c12319a83824c'>Full Factorial Design</a>
-</details>
 
 ### [Full factorial design: Experiment 1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/test_ff.sh)
 
-<details>
-    <summary>Result</summary>
-    <div>
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_2.png">
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_3.png">
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_4.png">
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/pos_const.png">
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/len_const.png">
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_resize_const.png">
-    </div>
-</details>
+<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_2.png">
+<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_3.png">
+<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_4.png">
+<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/pos_const.png">
+<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/len_const.png">
+<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_resize_const.png">
 
 ### [Full factorial design: Experiment 2](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_2_2_0.2-0.3_0.4-0.6/test_ff.sh)
 
-<details>
-    <summary>Result</summary>
-    <div>
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_2_2_0.2-0.3_0.4-0.6/Ver3_2.png">
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_2_2_0.2-0.3_0.4-0.6/pos_const.png">
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_2_2_0.2-0.3_0.4-0.6/len_const.png">
-    </div>
+<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_2_2_0.2-0.3_0.4-0.6/Ver3_2.png">
+<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_2_2_0.2-0.3_0.4-0.6/pos_const.png">
+<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_2_2_0.2-0.3_0.4-0.6/len_const.png">
+
+</div>
 </details>
 
 ## Ver 4. [(Update: ./models/post_processing/pa/pa.pyx)](https://github.com/Zerohertz/pan_pp.pytorch/commit/7127027bb90084bf49856aef0295409b6744518e)
 
 <details>
-    <summary>Result</summary>
-    <div>
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver4_2_0.2_0.5/Ver4.png">
-    </div>
+<summary>Read more</summary>
+<div>
+
+<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver4_2_0.2_0.5/Ver4.png">
+
+</div>
 </details>
 
 ## Ver 5. [(Add: ./models/post_processing/boxgen/boxgen.pyx)](https://github.com/Zerohertz/pan_pp.pytorch/commit/233bf1dadb73673d255abb4ce5f3a86cd63636b6)
 
 <details>
-    <summary>Result</summary>
-    <div>
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver5_2_0.2_0.5/Ver5.png">
-    </div>
+<summary>Read more</summary>
+<div>
+
+<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver5_2_0.2_0.5/Ver5.png">
+
+</div>
 </details>
 
 ## Ver 6. (Update: ./models/post_processing/)
 
-<details open>
-<summary>Update</summary>
+<details>
+<summary>Read more</summary>
+<div>
 
 - <a href='https://github.com/Zerohertz/pan_pp.pytorch/commit/dd64dc0c6db19044da24cd558f49849628278b3d'>Pixel Aggregation</a>
 - <a href='https://github.com/Zerohertz/pan_pp.pytorch/commit/2fcae8ab733a63be1a38e47a577819a74d821d0c'>Boxgen</a>
-</details>
 
 ### [Full factorial design: Experiment 1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2_0.2-0.3_0.4-0.6/test_ff.sh)
 
-<details>
-    <summary>Result</summary>
-    <div>
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2-4_0.2-0.3_0.4-0.6/Ver6_Base.png">
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2-4_0.2-0.3_0.4-0.6/Ver6_2.png">
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2-4_0.2-0.3_0.4-0.6/pos_const.png">
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2-4_0.2-0.3_0.4-0.6/len_const.png">
-    </div>
+<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2-4_0.2-0.3_0.4-0.6/Ver6_Base.png">
+<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2-4_0.2-0.3_0.4-0.6/Ver6_2.png">
+<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2-4_0.2-0.3_0.4-0.6/pos_const.png">
+<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2-4_0.2-0.3_0.4-0.6/len_const.png">
+
+</div>
 </details>
 
 ## Ver 7. [(Update: ./models/post_processing/boxgen/boxgen.pyx)](https://github.com/Zerohertz/pan_pp.pytorch/commit/ca252f6b581878fa735a414c168e09522b97c171)
 
 <details>
-    <summary>Result</summary>
-    <div>
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver7_2_0.2_0.5/Ver7_Base.png">
-    </div>
+<summary>Read more</summary>
+<div>
+
+<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver7_2_0.2_0.5/Ver7_Base.png">
+
+</div>
 </details>
 
 ## Ver 8. [(Update: ./models/post_processing/)](https://github.com/Zerohertz/pan_pp.pytorch/commit/f3601b043948de1b3496295d87ea92e621f827bb)
 
-<details>
+<details open>
     <summary>Result</summary>
     <div>
         <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver8_2_0.2_0.5/Ver8_Base.png">
