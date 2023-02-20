@@ -15,16 +15,16 @@ cdef np.ndarray[np.int32_t, ndim=2] _boxgen(np.ndarray[np.int32_t, ndim=2] label
                                         np.ndarray[np.float32_t, ndim=1] scale,
                                         float pos_const,
                                         float len_const):
-    cdef int W, H
-    W = label.shape[0]
-    H = label.shape[1]
-    cdef np.ndarray[np.uint8_t, ndim=3] inds = np.zeros((label_num, W, H), dtype=np.bool)
+    cdef int H, W
+    H = label.shape[0]
+    W = label.shape[1]
+    cdef np.ndarray[np.uint8_t, ndim=3] inds = np.zeros((label_num, H, W), dtype=np.bool)
     cdef np.ndarray[np.float32_t, ndim=1] area = np.full(label_num, -1, dtype=np.float32)
     cdef np.ndarray[np.float32_t, ndim=1] score_i = np.full(label_num, -1, dtype=np.float32)
-    cdef np.ndarray[np.int32_t, ndim=2] points = np.full((W*H, 3), label_num + 1, dtype=np.int32)
+    cdef np.ndarray[np.int32_t, ndim=2] points = np.full((H*W, 3), label_num + 1, dtype=np.int32)
     cdef np.ndarray[np.int32_t, ndim=1] tmp_points = np.zeros(3, dtype=np.int32)
-    cdef np.ndarray[np.int32_t, ndim=2] points_New = np.full((W*H, 2), label_num + 1, dtype=np.int32)
-    cdef np.ndarray[np.int32_t, ndim=1] points_idx = np.zeros(W*H, dtype=np.int32)
+    cdef np.ndarray[np.int32_t, ndim=2] points_New = np.full((H*W, 2), label_num + 1, dtype=np.int32)
+    cdef np.ndarray[np.int32_t, ndim=1] points_idx = np.zeros(H*W, dtype=np.int32)
     cdef np.ndarray[np.float32_t, ndim=1] pos = np.zeros(2, dtype=np.float32)
     cdef np.ndarray[np.float32_t, ndim=1] length = np.zeros(2, dtype=np.float32)
     cdef np.ndarray[np.int32_t, ndim=3] bboxes = np.zeros((0, 4, 2), dtype=np.int32)
@@ -32,9 +32,9 @@ cdef np.ndarray[np.int32_t, ndim=2] _boxgen(np.ndarray[np.int32_t, ndim=2] label
     cdef float deg
     cdef tuple pos_t, length_t
     
-#     print(W*H) -> 376832
-    for i in range(W):
-        for j in range(H):
+#     print(H*W) -> 376832
+    for i in range(H):
+        for j in range(W):
             tmp = label[i][j]
             if tmp == 0:
                 continue
@@ -49,7 +49,7 @@ cdef np.ndarray[np.int32_t, ndim=2] _boxgen(np.ndarray[np.int32_t, ndim=2] label
             tmp_points[0] = tmp
             tmp_points[1] = i
             tmp_points[2] = j
-            points[i+W*j] = tmp_points
+            points[i+H*j] = tmp_points
 
     points_idx = np.argsort(points, axis=0)[:, 0].astype('int32')
     points_New = points[points_idx][:, 1:3]

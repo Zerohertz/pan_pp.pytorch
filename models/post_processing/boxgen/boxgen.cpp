@@ -1867,8 +1867,8 @@ static PyObject *__pyx_codeobj__15;
  */
 
 static PyArrayObject *__pyx_f_6boxgen__boxgen(PyArrayObject *__pyx_v_label, PyArrayObject *__pyx_v_score, int __pyx_v_label_num, float __pyx_v_min_area, float __pyx_v_min_score, PyArrayObject *__pyx_v_scale, float __pyx_v_pos_const, float __pyx_v_len_const) {
-  int __pyx_v_W;
   int __pyx_v_H;
+  int __pyx_v_W;
   PyArrayObject *__pyx_v_inds = 0;
   PyArrayObject *__pyx_v_area = 0;
   PyArrayObject *__pyx_v_score_i = 0;
@@ -2021,26 +2021,26 @@ static PyArrayObject *__pyx_f_6boxgen__boxgen(PyArrayObject *__pyx_v_label, PyAr
 
   /* "boxgen.pyx":19
  *                                         float len_const):
- *     cdef int W, H
- *     W = label.shape[0]             # <<<<<<<<<<<<<<
- *     H = label.shape[1]
- *     cdef np.ndarray[np.uint8_t, ndim=3] inds = np.zeros((label_num, W, H), dtype=np.bool)
+ *     cdef int H, W
+ *     H = label.shape[0]             # <<<<<<<<<<<<<<
+ *     W = label.shape[1]
+ *     cdef np.ndarray[np.uint8_t, ndim=3] inds = np.zeros((label_num, H, W), dtype=np.bool)
  */
-  __pyx_v_W = (__pyx_v_label->dimensions[0]);
+  __pyx_v_H = (__pyx_v_label->dimensions[0]);
 
   /* "boxgen.pyx":20
- *     cdef int W, H
- *     W = label.shape[0]
- *     H = label.shape[1]             # <<<<<<<<<<<<<<
- *     cdef np.ndarray[np.uint8_t, ndim=3] inds = np.zeros((label_num, W, H), dtype=np.bool)
+ *     cdef int H, W
+ *     H = label.shape[0]
+ *     W = label.shape[1]             # <<<<<<<<<<<<<<
+ *     cdef np.ndarray[np.uint8_t, ndim=3] inds = np.zeros((label_num, H, W), dtype=np.bool)
  *     cdef np.ndarray[np.float32_t, ndim=1] area = np.full(label_num, -1, dtype=np.float32)
  */
-  __pyx_v_H = (__pyx_v_label->dimensions[1]);
+  __pyx_v_W = (__pyx_v_label->dimensions[1]);
 
   /* "boxgen.pyx":21
- *     W = label.shape[0]
- *     H = label.shape[1]
- *     cdef np.ndarray[np.uint8_t, ndim=3] inds = np.zeros((label_num, W, H), dtype=np.bool)             # <<<<<<<<<<<<<<
+ *     H = label.shape[0]
+ *     W = label.shape[1]
+ *     cdef np.ndarray[np.uint8_t, ndim=3] inds = np.zeros((label_num, H, W), dtype=np.bool)             # <<<<<<<<<<<<<<
  *     cdef np.ndarray[np.float32_t, ndim=1] area = np.full(label_num, -1, dtype=np.float32)
  *     cdef np.ndarray[np.float32_t, ndim=1] score_i = np.full(label_num, -1, dtype=np.float32)
  */
@@ -2051,9 +2051,9 @@ static PyArrayObject *__pyx_f_6boxgen__boxgen(PyArrayObject *__pyx_v_label, PyAr
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_label_num); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_W); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_H); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_H); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_W); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
@@ -2100,11 +2100,11 @@ static PyArrayObject *__pyx_f_6boxgen__boxgen(PyArrayObject *__pyx_v_label, PyAr
   __pyx_t_1 = 0;
 
   /* "boxgen.pyx":22
- *     H = label.shape[1]
- *     cdef np.ndarray[np.uint8_t, ndim=3] inds = np.zeros((label_num, W, H), dtype=np.bool)
+ *     W = label.shape[1]
+ *     cdef np.ndarray[np.uint8_t, ndim=3] inds = np.zeros((label_num, H, W), dtype=np.bool)
  *     cdef np.ndarray[np.float32_t, ndim=1] area = np.full(label_num, -1, dtype=np.float32)             # <<<<<<<<<<<<<<
  *     cdef np.ndarray[np.float32_t, ndim=1] score_i = np.full(label_num, -1, dtype=np.float32)
- *     cdef np.ndarray[np.int32_t, ndim=2] points = np.full((W*H, 3), label_num + 1, dtype=np.int32)
+ *     cdef np.ndarray[np.int32_t, ndim=2] points = np.full((H*W, 3), label_num + 1, dtype=np.int32)
  */
   __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2150,10 +2150,10 @@ static PyArrayObject *__pyx_f_6boxgen__boxgen(PyArrayObject *__pyx_v_label, PyAr
   __pyx_t_3 = 0;
 
   /* "boxgen.pyx":23
- *     cdef np.ndarray[np.uint8_t, ndim=3] inds = np.zeros((label_num, W, H), dtype=np.bool)
+ *     cdef np.ndarray[np.uint8_t, ndim=3] inds = np.zeros((label_num, H, W), dtype=np.bool)
  *     cdef np.ndarray[np.float32_t, ndim=1] area = np.full(label_num, -1, dtype=np.float32)
  *     cdef np.ndarray[np.float32_t, ndim=1] score_i = np.full(label_num, -1, dtype=np.float32)             # <<<<<<<<<<<<<<
- *     cdef np.ndarray[np.int32_t, ndim=2] points = np.full((W*H, 3), label_num + 1, dtype=np.int32)
+ *     cdef np.ndarray[np.int32_t, ndim=2] points = np.full((H*W, 3), label_num + 1, dtype=np.int32)
  *     cdef np.ndarray[np.int32_t, ndim=1] tmp_points = np.zeros(3, dtype=np.int32)
  */
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 23, __pyx_L1_error)
@@ -2202,16 +2202,16 @@ static PyArrayObject *__pyx_f_6boxgen__boxgen(PyArrayObject *__pyx_v_label, PyAr
   /* "boxgen.pyx":24
  *     cdef np.ndarray[np.float32_t, ndim=1] area = np.full(label_num, -1, dtype=np.float32)
  *     cdef np.ndarray[np.float32_t, ndim=1] score_i = np.full(label_num, -1, dtype=np.float32)
- *     cdef np.ndarray[np.int32_t, ndim=2] points = np.full((W*H, 3), label_num + 1, dtype=np.int32)             # <<<<<<<<<<<<<<
+ *     cdef np.ndarray[np.int32_t, ndim=2] points = np.full((H*W, 3), label_num + 1, dtype=np.int32)             # <<<<<<<<<<<<<<
  *     cdef np.ndarray[np.int32_t, ndim=1] tmp_points = np.zeros(3, dtype=np.int32)
- *     cdef np.ndarray[np.int32_t, ndim=2] points_New = np.full((W*H, 2), label_num + 1, dtype=np.int32)
+ *     cdef np.ndarray[np.int32_t, ndim=2] points_New = np.full((H*W, 2), label_num + 1, dtype=np.int32)
  */
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_full); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_From_int((__pyx_v_W * __pyx_v_H)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int((__pyx_v_H * __pyx_v_W)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
@@ -2261,10 +2261,10 @@ static PyArrayObject *__pyx_f_6boxgen__boxgen(PyArrayObject *__pyx_v_label, PyAr
 
   /* "boxgen.pyx":25
  *     cdef np.ndarray[np.float32_t, ndim=1] score_i = np.full(label_num, -1, dtype=np.float32)
- *     cdef np.ndarray[np.int32_t, ndim=2] points = np.full((W*H, 3), label_num + 1, dtype=np.int32)
+ *     cdef np.ndarray[np.int32_t, ndim=2] points = np.full((H*W, 3), label_num + 1, dtype=np.int32)
  *     cdef np.ndarray[np.int32_t, ndim=1] tmp_points = np.zeros(3, dtype=np.int32)             # <<<<<<<<<<<<<<
- *     cdef np.ndarray[np.int32_t, ndim=2] points_New = np.full((W*H, 2), label_num + 1, dtype=np.int32)
- *     cdef np.ndarray[np.int32_t, ndim=1] points_idx = np.zeros(W*H, dtype=np.int32)
+ *     cdef np.ndarray[np.int32_t, ndim=2] points_New = np.full((H*W, 2), label_num + 1, dtype=np.int32)
+ *     cdef np.ndarray[np.int32_t, ndim=1] points_idx = np.zeros(H*W, dtype=np.int32)
  */
   __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
@@ -2299,10 +2299,10 @@ static PyArrayObject *__pyx_f_6boxgen__boxgen(PyArrayObject *__pyx_v_label, PyAr
   __pyx_t_3 = 0;
 
   /* "boxgen.pyx":26
- *     cdef np.ndarray[np.int32_t, ndim=2] points = np.full((W*H, 3), label_num + 1, dtype=np.int32)
+ *     cdef np.ndarray[np.int32_t, ndim=2] points = np.full((H*W, 3), label_num + 1, dtype=np.int32)
  *     cdef np.ndarray[np.int32_t, ndim=1] tmp_points = np.zeros(3, dtype=np.int32)
- *     cdef np.ndarray[np.int32_t, ndim=2] points_New = np.full((W*H, 2), label_num + 1, dtype=np.int32)             # <<<<<<<<<<<<<<
- *     cdef np.ndarray[np.int32_t, ndim=1] points_idx = np.zeros(W*H, dtype=np.int32)
+ *     cdef np.ndarray[np.int32_t, ndim=2] points_New = np.full((H*W, 2), label_num + 1, dtype=np.int32)             # <<<<<<<<<<<<<<
+ *     cdef np.ndarray[np.int32_t, ndim=1] points_idx = np.zeros(H*W, dtype=np.int32)
  *     cdef np.ndarray[np.float32_t, ndim=1] pos = np.zeros(2, dtype=np.float32)
  */
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 26, __pyx_L1_error)
@@ -2310,7 +2310,7 @@ static PyArrayObject *__pyx_f_6boxgen__boxgen(PyArrayObject *__pyx_v_label, PyAr
   __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_full); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyInt_From_int((__pyx_v_W * __pyx_v_H)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_int((__pyx_v_H * __pyx_v_W)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -2360,8 +2360,8 @@ static PyArrayObject *__pyx_f_6boxgen__boxgen(PyArrayObject *__pyx_v_label, PyAr
 
   /* "boxgen.pyx":27
  *     cdef np.ndarray[np.int32_t, ndim=1] tmp_points = np.zeros(3, dtype=np.int32)
- *     cdef np.ndarray[np.int32_t, ndim=2] points_New = np.full((W*H, 2), label_num + 1, dtype=np.int32)
- *     cdef np.ndarray[np.int32_t, ndim=1] points_idx = np.zeros(W*H, dtype=np.int32)             # <<<<<<<<<<<<<<
+ *     cdef np.ndarray[np.int32_t, ndim=2] points_New = np.full((H*W, 2), label_num + 1, dtype=np.int32)
+ *     cdef np.ndarray[np.int32_t, ndim=1] points_idx = np.zeros(H*W, dtype=np.int32)             # <<<<<<<<<<<<<<
  *     cdef np.ndarray[np.float32_t, ndim=1] pos = np.zeros(2, dtype=np.float32)
  *     cdef np.ndarray[np.float32_t, ndim=1] length = np.zeros(2, dtype=np.float32)
  */
@@ -2370,7 +2370,7 @@ static PyArrayObject *__pyx_f_6boxgen__boxgen(PyArrayObject *__pyx_v_label, PyAr
   __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_zeros); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyInt_From_int((__pyx_v_W * __pyx_v_H)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int((__pyx_v_H * __pyx_v_W)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2406,8 +2406,8 @@ static PyArrayObject *__pyx_f_6boxgen__boxgen(PyArrayObject *__pyx_v_label, PyAr
   __pyx_t_2 = 0;
 
   /* "boxgen.pyx":28
- *     cdef np.ndarray[np.int32_t, ndim=2] points_New = np.full((W*H, 2), label_num + 1, dtype=np.int32)
- *     cdef np.ndarray[np.int32_t, ndim=1] points_idx = np.zeros(W*H, dtype=np.int32)
+ *     cdef np.ndarray[np.int32_t, ndim=2] points_New = np.full((H*W, 2), label_num + 1, dtype=np.int32)
+ *     cdef np.ndarray[np.int32_t, ndim=1] points_idx = np.zeros(H*W, dtype=np.int32)
  *     cdef np.ndarray[np.float32_t, ndim=1] pos = np.zeros(2, dtype=np.float32)             # <<<<<<<<<<<<<<
  *     cdef np.ndarray[np.float32_t, ndim=1] length = np.zeros(2, dtype=np.float32)
  *     cdef np.ndarray[np.int32_t, ndim=3] bboxes = np.zeros((0, 4, 2), dtype=np.int32)
@@ -2445,7 +2445,7 @@ static PyArrayObject *__pyx_f_6boxgen__boxgen(PyArrayObject *__pyx_v_label, PyAr
   __pyx_t_3 = 0;
 
   /* "boxgen.pyx":29
- *     cdef np.ndarray[np.int32_t, ndim=1] points_idx = np.zeros(W*H, dtype=np.int32)
+ *     cdef np.ndarray[np.int32_t, ndim=1] points_idx = np.zeros(H*W, dtype=np.int32)
  *     cdef np.ndarray[np.float32_t, ndim=1] pos = np.zeros(2, dtype=np.float32)
  *     cdef np.ndarray[np.float32_t, ndim=1] length = np.zeros(2, dtype=np.float32)             # <<<<<<<<<<<<<<
  *     cdef np.ndarray[np.int32_t, ndim=3] bboxes = np.zeros((0, 4, 2), dtype=np.int32)
@@ -2524,31 +2524,31 @@ static PyArrayObject *__pyx_f_6boxgen__boxgen(PyArrayObject *__pyx_v_label, PyAr
 
   /* "boxgen.pyx":36
  * 
- * #     print(W*H) -> 376832
- *     for i in range(W):             # <<<<<<<<<<<<<<
- *         for j in range(H):
+ * #     print(H*W) -> 376832
+ *     for i in range(H):             # <<<<<<<<<<<<<<
+ *         for j in range(W):
  *             tmp = label[i][j]
  */
-  __pyx_t_16 = __pyx_v_W;
+  __pyx_t_16 = __pyx_v_H;
   __pyx_t_17 = __pyx_t_16;
   for (__pyx_t_18 = 0; __pyx_t_18 < __pyx_t_17; __pyx_t_18+=1) {
     __pyx_v_i = __pyx_t_18;
 
     /* "boxgen.pyx":37
- * #     print(W*H) -> 376832
- *     for i in range(W):
- *         for j in range(H):             # <<<<<<<<<<<<<<
+ * #     print(H*W) -> 376832
+ *     for i in range(H):
+ *         for j in range(W):             # <<<<<<<<<<<<<<
  *             tmp = label[i][j]
  *             if tmp == 0:
  */
-    __pyx_t_19 = __pyx_v_H;
+    __pyx_t_19 = __pyx_v_W;
     __pyx_t_20 = __pyx_t_19;
     for (__pyx_t_21 = 0; __pyx_t_21 < __pyx_t_20; __pyx_t_21+=1) {
       __pyx_v_j = __pyx_t_21;
 
       /* "boxgen.pyx":38
- *     for i in range(W):
- *         for j in range(H):
+ *     for i in range(H):
+ *         for j in range(W):
  *             tmp = label[i][j]             # <<<<<<<<<<<<<<
  *             if tmp == 0:
  *                 continue
@@ -2563,7 +2563,7 @@ static PyArrayObject *__pyx_f_6boxgen__boxgen(PyArrayObject *__pyx_v_label, PyAr
       __pyx_v_tmp = __pyx_t_22;
 
       /* "boxgen.pyx":39
- *         for j in range(H):
+ *         for j in range(W):
  *             tmp = label[i][j]
  *             if tmp == 0:             # <<<<<<<<<<<<<<
  *                 continue
@@ -2582,7 +2582,7 @@ static PyArrayObject *__pyx_f_6boxgen__boxgen(PyArrayObject *__pyx_v_label, PyAr
         goto __pyx_L5_continue;
 
         /* "boxgen.pyx":39
- *         for j in range(H):
+ *         for j in range(W):
  *             tmp = label[i][j]
  *             if tmp == 0:             # <<<<<<<<<<<<<<
  *                 continue
@@ -2700,7 +2700,7 @@ static PyArrayObject *__pyx_f_6boxgen__boxgen(PyArrayObject *__pyx_v_label, PyAr
  *             tmp_points[0] = tmp
  *             tmp_points[1] = i             # <<<<<<<<<<<<<<
  *             tmp_points[2] = j
- *             points[i+W*j] = tmp_points
+ *             points[i+H*j] = tmp_points
  */
       __pyx_t_24 = 1;
       *__Pyx_BufPtrStrided1d(__pyx_t_5numpy_int32_t *, __pyx_pybuffernd_tmp_points.rcbuffer->pybuffer.buf, __pyx_t_24, __pyx_pybuffernd_tmp_points.diminfo[0].strides) = __pyx_v_i;
@@ -2709,7 +2709,7 @@ static PyArrayObject *__pyx_f_6boxgen__boxgen(PyArrayObject *__pyx_v_label, PyAr
  *             tmp_points[0] = tmp
  *             tmp_points[1] = i
  *             tmp_points[2] = j             # <<<<<<<<<<<<<<
- *             points[i+W*j] = tmp_points
+ *             points[i+H*j] = tmp_points
  * 
  */
       __pyx_t_24 = 2;
@@ -2718,18 +2718,18 @@ static PyArrayObject *__pyx_f_6boxgen__boxgen(PyArrayObject *__pyx_v_label, PyAr
       /* "boxgen.pyx":52
  *             tmp_points[1] = i
  *             tmp_points[2] = j
- *             points[i+W*j] = tmp_points             # <<<<<<<<<<<<<<
+ *             points[i+H*j] = tmp_points             # <<<<<<<<<<<<<<
  * 
  *     points_idx = np.argsort(points, axis=0)[:, 0].astype('int32')
  */
-      __pyx_t_22 = (__pyx_v_i + (__pyx_v_W * __pyx_v_j));
+      __pyx_t_22 = (__pyx_v_i + (__pyx_v_H * __pyx_v_j));
       if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_points), __pyx_t_22, ((PyObject *)__pyx_v_tmp_points), int, 1, __Pyx_PyInt_From_int, 0, 0, 0) < 0)) __PYX_ERR(0, 52, __pyx_L1_error)
       __pyx_L5_continue:;
     }
   }
 
   /* "boxgen.pyx":54
- *             points[i+W*j] = tmp_points
+ *             points[i+H*j] = tmp_points
  * 
  *     points_idx = np.argsort(points, axis=0)[:, 0].astype('int32')             # <<<<<<<<<<<<<<
  *     points_New = points[points_idx][:, 1:3]
@@ -4851,18 +4851,18 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 
   /* "boxgen.pyx":25
  *     cdef np.ndarray[np.float32_t, ndim=1] score_i = np.full(label_num, -1, dtype=np.float32)
- *     cdef np.ndarray[np.int32_t, ndim=2] points = np.full((W*H, 3), label_num + 1, dtype=np.int32)
+ *     cdef np.ndarray[np.int32_t, ndim=2] points = np.full((H*W, 3), label_num + 1, dtype=np.int32)
  *     cdef np.ndarray[np.int32_t, ndim=1] tmp_points = np.zeros(3, dtype=np.int32)             # <<<<<<<<<<<<<<
- *     cdef np.ndarray[np.int32_t, ndim=2] points_New = np.full((W*H, 2), label_num + 1, dtype=np.int32)
- *     cdef np.ndarray[np.int32_t, ndim=1] points_idx = np.zeros(W*H, dtype=np.int32)
+ *     cdef np.ndarray[np.int32_t, ndim=2] points_New = np.full((H*W, 2), label_num + 1, dtype=np.int32)
+ *     cdef np.ndarray[np.int32_t, ndim=1] points_idx = np.zeros(H*W, dtype=np.int32)
  */
   __pyx_tuple_ = PyTuple_Pack(1, __pyx_int_3); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
   /* "boxgen.pyx":28
- *     cdef np.ndarray[np.int32_t, ndim=2] points_New = np.full((W*H, 2), label_num + 1, dtype=np.int32)
- *     cdef np.ndarray[np.int32_t, ndim=1] points_idx = np.zeros(W*H, dtype=np.int32)
+ *     cdef np.ndarray[np.int32_t, ndim=2] points_New = np.full((H*W, 2), label_num + 1, dtype=np.int32)
+ *     cdef np.ndarray[np.int32_t, ndim=1] points_idx = np.zeros(H*W, dtype=np.int32)
  *     cdef np.ndarray[np.float32_t, ndim=1] pos = np.zeros(2, dtype=np.float32)             # <<<<<<<<<<<<<<
  *     cdef np.ndarray[np.float32_t, ndim=1] length = np.zeros(2, dtype=np.float32)
  *     cdef np.ndarray[np.int32_t, ndim=3] bboxes = np.zeros((0, 4, 2), dtype=np.int32)
@@ -4886,7 +4886,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__4);
 
   /* "boxgen.pyx":54
- *             points[i+W*j] = tmp_points
+ *             points[i+H*j] = tmp_points
  * 
  *     points_idx = np.argsort(points, axis=0)[:, 0].astype('int32')             # <<<<<<<<<<<<<<
  *     points_New = points[points_idx][:, 1:3]
