@@ -16,6 +16,7 @@ from mmcv.parallel import DataContainer as DC
 
 
 ic15_test_data_dir = '/home/jovyan/local/2_public_data/TwinReader/STD_data/Korean/labeled/보험금청구서/images/'
+# ic15_test_data_dir = '/home/jovyan/local/1_user/hgoh@agilesoda.ai/3_Org_Imp/test/'
 
 def get_img(img_path, read_type='pil'):
     try:
