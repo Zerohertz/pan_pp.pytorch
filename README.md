@@ -36,7 +36,7 @@
 |Time [ms]|2.420|256.450|7.560|2.807|269.277|
 |Weight [%]|0.900|95.236|2.807|1.057|-|
 
-<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_Base.png">
+<img src="https://user-images.githubusercontent.com/42334717/220261919-02c721a6-bfd6-47f6-b4cc-ff514dd65356.png">
 
 </div>
 </details>
@@ -52,18 +52,18 @@
 
 ### [Full factorial design: Experiment 1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/test_ff.sh)
 
-<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_2.png">
-<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_3.png">
-<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_4.png">
-<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/pos_const.png">
-<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/len_const.png">
-<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_1_2-4_0-0.2_0-1/Ver3_resize_const.png">
+<img src="https://user-images.githubusercontent.com/42334717/220262002-90843c0f-69b3-4922-b34f-9ada34377350.png">
+<img src="https://user-images.githubusercontent.com/42334717/220262009-9c7d256a-26b9-4c66-9715-3953bc06968d.png">
+<img src="https://user-images.githubusercontent.com/42334717/220262016-6e2ae02e-7f7c-4dcc-ba22-6d2ceeaa2e34.png">
+<img src="https://user-images.githubusercontent.com/42334717/220262161-90220aba-3ac3-4270-bd15-06cab1350c9b.png">
+<img src="https://user-images.githubusercontent.com/42334717/220262150-1fb55a8d-1142-4579-aa29-8f6aed07a9ca.png">
+<img src="https://user-images.githubusercontent.com/42334717/220262253-abd8314d-232e-4ecc-aa68-3150127a8e6a.png">
 
 ### [Full factorial design: Experiment 2](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_2_2_0.2-0.3_0.4-0.6/test_ff.sh)
 
-<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_2_2_0.2-0.3_0.4-0.6/Ver3_2.png">
-<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_2_2_0.2-0.3_0.4-0.6/pos_const.png">
-<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver3_2_2_0.2-0.3_0.4-0.6/len_const.png">
+<img src="https://user-images.githubusercontent.com/42334717/220262413-0cd877a9-26f3-484c-b299-78c3941fea81.png">
+<img src="https://user-images.githubusercontent.com/42334717/220262411-1b512ecd-da52-487e-be7b-91161a3b26ae.png">
+<img src="https://user-images.githubusercontent.com/42334717/220262417-0927deb2-2ae2-43de-b819-8f09a077ae36.png">
 
 </div>
 </details>
@@ -74,7 +74,7 @@
 <summary>Read more</summary>
 <div>
 
-<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver4_2_0.2_0.5/Ver4.png">
+<img src="https://user-images.githubusercontent.com/42334717/220262538-6dd26c0b-9d26-4529-af11-5fc1b430501c.png">
 
 </div>
 </details>
@@ -85,7 +85,7 @@
 <summary>Read more</summary>
 <div>
 
-<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver5_2_0.2_0.5/Ver5.png">
+<img src="https://user-images.githubusercontent.com/42334717/220262542-14aead80-03ef-48f2-b0f9-3d27862a48a0.png">
 
 </div>
 </details>
@@ -101,10 +101,10 @@
 
 ### [Full factorial design: Experiment 1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2_0.2-0.3_0.4-0.6/test_ff.sh)
 
-<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2-4_0.2-0.3_0.4-0.6/Ver6_Base.png">
-<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2-4_0.2-0.3_0.4-0.6/Ver6_2.png">
-<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2-4_0.2-0.3_0.4-0.6/pos_const.png">
-<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver6_1_2-4_0.2-0.3_0.4-0.6/len_const.png">
+<img src="https://user-images.githubusercontent.com/42334717/220262771-55f3ac6e-e5ec-44b8-a63a-4367c081c1fd.png">
+<img src="https://user-images.githubusercontent.com/42334717/220262769-426ce52e-6742-4224-8098-60e6a917cf71.png">
+<img src="https://user-images.githubusercontent.com/42334717/220262766-2255b3c1-0a5f-4d12-a722-22cf2d2e71d4.png">
+<img src="https://user-images.githubusercontent.com/42334717/220262761-804bf8f2-490d-47f7-ab16-e3a40db7700e.png">
 
 </div>
 </details>
@@ -115,7 +115,7 @@
 <summary>Read more</summary>
 <div>
 
-<img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver7_2_0.2_0.5/Ver7_Base.png">
+<img src="https://user-images.githubusercontent.com/42334717/220262937-b9e3a5ab-e13d-4c16-9dcf-7cce7fa606fb.png">
 
 </div>
 </details>
@@ -125,13 +125,13 @@
 <details open>
     <summary>Result</summary>
     <div>
-        <img src="https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver8_2_0.2_0.5/Ver8_Base.png">
+        <img src="https://user-images.githubusercontent.com/42334717/220262939-4217d7bd-c5a2-49fe-a94d-c8022b6982a9.png">
     </div>
 </details>
 
 # Conclusion
 
-![Conclusion 1](https://github.com/Zerohertz/pan_pp.pytorch/blob/master/results/Ver8_2_0.2_0.5/Result.png)
+![Conclusion 1](https://user-images.githubusercontent.com/42334717/220262931-1876d7e0-7453-4a6a-be61-0e2bb3963fac.png)
 
 ---
 
