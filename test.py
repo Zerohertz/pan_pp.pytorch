@@ -168,11 +168,11 @@ if __name__ == '__main__':
     parser.add_argument('config', default='config/pan_pp/pan_pp_test.py', help='config file path')
     parser.add_argument('checkpoint', nargs='?', type=str, default=None)
     parser.add_argument('--report_speed', action='store_true')
-    parser.add_argument('--resize_const', default=4)
+    parser.add_argument('--resize_const', default=1)
     parser.add_argument('--pos_const', default=0)
     parser.add_argument('--len_const', default=0)
 #     parser.add_argument('--vis', action='store_true')
 #     parser.add_argument('--debug', action='store_true')
     args = parser.parse_args()
-    args.checkpoint = './weights/doc_panpp_best_weight.pth.tar'
+    args.checkpoint = './pretrained/doc_panpp_best_weight.pth.tar'
     main(args)
