@@ -62,6 +62,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Set Mode')
     parser.add_argument('--mode')
     parser.add_argument('--compare')
+    parser.add_argument('--name')
     args = parser.parse_args()
     print(args)
     if args.mode == '0':
@@ -72,12 +73,10 @@ if __name__ == '__main__':
         Time = [[0 for _ in range(N)] for _ in range(5)]
         met = {}
         Met = [[0 for _ in range(N)] for _ in range(3)]
-
         for i in range(N):
             Ver[i] = K[i]
             for j in range(5):
                 Time[j][i] = data[j+1][i]
-
         for i in range(N):
             data = pd.read_csv('../evaluation/' + Ver[i] + '.csv', header=None)        
             for j in range(3):
@@ -85,10 +84,13 @@ if __name__ == '__main__':
         if args.compare == None:
             plot_result(Ver, Met, Time, list(range(N)), 'Result')
         else:
-            plot_result(Ver, Met, Time, list(map(int, args.compare.split(','))), 'Result')
+            tmp = []
+            for i in map(str, args.compare[:-1].split(',')):
+                tmp.append(Ver.index(i))
+            plot_result(Ver, Met, Time, tmp, args.name)
     elif args.mode == '1':
         a = '1_0_0'
         b = '2_0.2_0.5'
         c = '4_0_0'
         d = '4_0.2_0.5'
-        compareIMG('만기증권투자신탁1호_png-001', [1000,100,300,300], 'Compare', a, b, c, d)
+        compareIMG('DataName', [1000,100,300,300], args.name, a, b, c, d)
