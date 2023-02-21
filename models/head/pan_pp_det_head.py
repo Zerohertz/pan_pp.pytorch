@@ -128,7 +128,7 @@ class PAN_PP_DetHead(nn.Module):
         #####################################################################################################
         g4 = time.time() - g4
         #####################################################################################################
-        with open('./time/tmp.csv', 'a', encoding='utf8') as f:
+        with open('./results/time/tmp.csv', 'a', encoding='utf8') as f:
             wr = csv.writer(f)
             wr.writerow([g0, g1, g2, g3, g4])
         return results
