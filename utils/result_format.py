@@ -8,7 +8,7 @@ import datetime
 class ResultFormat(object):
     def __init__(self, data_type, result_path):
         self.data_type = data_type
-        self.result_path = os.path.join(result_path,str(datetime.datetime.now()).replace('.','').replace(' ','-'))
+        self.result_path = os.path.join(result_path, str(datetime.datetime.now()).replace('.','').replace(' ','-'))
 
         if osp.isfile(result_path):
             os.remove(result_path)
@@ -26,7 +26,7 @@ class ResultFormat(object):
         tmp_folder = self.result_path.replace('.zip', '')
 
         bboxes = outputs['bboxes']
-        scores=outputs['scores']
+#         scores = outputs['scores']
         words = None
         if 'words' in outputs:
             words = outputs['words']
