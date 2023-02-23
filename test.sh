@@ -24,28 +24,33 @@ cd ..
 # Execution
 exe(){
     ## Test
-    echo ${resize_const}_${pos_const}_${len_const}
+    echo "${resize_const}_${pos_const}_${len_const}"
+    read -p "Exp Name: " tmp
+    if [ -z $tmp ]
+    then
+    tmp="${resize_const}_${pos_const}_${len_const}"
+    fi
+    echo "Exp Name: " $tmp
     CUDA_VISIBLE_DEVICES=${CUDA_NUM} python test.py config/pan_pp/pan_pp_test.py --resize_const=${resize_const} --pos_const=${pos_const} --len_const=${len_const}
     
     ## Rename tmp.csv & Make time.csv
     cd results/time
-    rm -rf ${resize_const}_${pos_const}_${len_const}.csv
-    mv ./tmp.csv ./${resize_const}_${pos_const}_${len_const}.csv
+    rm -rf $tmp.csv
+    mv ./tmp.csv ./$tmp.csv
     python Time_Measurement.py
     cd ..
     cd ..
     
     ## Rename outputs
     cd outputs
-    rm -rf ${resize_const}_${pos_const}_${len_const}
-    mv ./20* ./${resize_const}_${pos_const}_${len_const}
+    rm -rf $tmp
+    mv ./20* ./$tmp
     cd ..
     
     ## Evaluation
     cd results/evaluation
-    rm -rf ${resize_const}_${pos_const}_${len_const}.csv
+    rm -rf $tmp.csv
     cd CLEval_1024
-    tmp=${resize_const}_${pos_const}_${len_const}
     python prepare.py --path=$tmp
     python script.py --path=$tmp
     cd ..
