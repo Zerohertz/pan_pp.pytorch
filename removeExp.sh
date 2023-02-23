@@ -1,6 +1,6 @@
 read -p 'Exp: ' tmp
 cd outputs
-rm -rf $tmp
+rm -rf $tmp*
 cd ..
 cd results
 cd evaluation
