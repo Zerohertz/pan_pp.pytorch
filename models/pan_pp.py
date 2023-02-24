@@ -99,7 +99,7 @@ class PAN_PP(nn.Module):
             outputs.update(loss_det)
         else:
             out_det = self._upsample(out_det, imgs.size(), cfg.test_cfg.scale)
-            res_det = self.det_head.get_results(out_det, img_metas, cfg)
+            res_det, l = self.det_head.get_results(out_det, img_metas, cfg)
             outputs.update(res_det)
 
         if self.rec_head is not None:
@@ -139,4 +139,7 @@ class PAN_PP(nn.Module):
                 outputs.update(
                     dict(words=words, word_scores=word_scores, label=''))
 
-        return outputs
+        if self.training:
+            return outputs
+        else:
+            return outputs, l

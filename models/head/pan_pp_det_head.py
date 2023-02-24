@@ -128,10 +128,7 @@ class PAN_PP_DetHead(nn.Module):
         #####################################################################################################
         g4 = time.time() - g4
         #####################################################################################################
-        with open('./results/time/tmp.csv', 'a', encoding='utf8') as f:
-            wr = csv.writer(f)
-            wr.writerow([g0, g1, g2, g3, g4])
-        return results
+        return results, [g0, g1, g2, g3, g4]
 
     def loss(self, out, gt_texts, gt_kernels, training_masks, gt_instances,
              gt_bboxes):
