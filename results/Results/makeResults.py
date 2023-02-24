@@ -47,7 +47,18 @@ def plot_result(Ver, Met, Time, ext, Name=''):
 def compareIMG(img, cut, Name='', *Ver):
     if len(Ver) > 4:
         return
-    else:
+    elif len(Ver) == 2:
+        fig = plt.figure(figsize=(15, 15))
+        fig.set_facecolor('white')
+        for i, j in enumerate(Ver):
+            plt.subplot(1,2,i+1)
+            tmp = plt.imread('../../../../outputs/' + j + '/' + img)
+            plt.imshow(tmp[cut[0]:cut[0]+cut[2],cut[1]:cut[1]+cut[3],:])
+            plt.title(j)
+            plt.axis('off')
+        if Name != '':
+            plt.savefig(Name + '.png', dpi=300, bbox_inches='tight', pad_inches=0.3, transparent=False)
+    elif len(Ver) == 4:
         fig = plt.figure(figsize=(15, 15))
         fig.set_facecolor('white')
         for i, j in enumerate(Ver):
@@ -102,12 +113,12 @@ if __name__ == '__main__':
             pass
         os.chdir(args.compare)
         a = 'Ground_Truth'
-        b = 'Vanilla_PANPP'
-        c = 'TwinReader'
-        d = '2_0.2_0.5'
+        b = 'Core'
+#         c = 'TwinReader'
+#         d = '2_0.2_0.5'
         boxSize = 500
         for i in range(10):
             for j in range(5):
                 compareIMG(data[int(args.compare)], [i*100,j*100,boxSize,boxSize],
                            data[int(args.compare)][:-4]+'-'+str(i*100)+'-'+str(j*100),
-                           a, b, c, d)
+                           a, b) #, c, d)

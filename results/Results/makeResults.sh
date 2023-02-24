@@ -1,6 +1,6 @@
 read status
 
-if [ $status -eq '00' ]
+if [ $status -eq "00" ]
 then
     cd ..
     cd time
@@ -24,12 +24,12 @@ then
         tmp="Vanilla_PANPP,TwinReader,${tmp}"
         python makeResults.py --mode=0 --compare=$tmp --name=$rc
     done
-elif [ $status -eq '01' ]
+elif [ $status -eq "01" ]
 then
     tmp="2_0.2_0.5"
     tmp="Vanilla_PANPP,TwinReader,${tmp},"
     python makeResults.py --mode=0 --compare=$tmp --name=Result
-elif [ $status -eq '1']
+elif [ $status -eq "10" ]
 then
     python makeResults.py --mode=1 --compare=3
 fi
