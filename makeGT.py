@@ -20,6 +20,12 @@ out = {}
 for idx, data in enumerate(test_loader):
     image_name, _ = osp.splitext(osp.basename(test_loader.dataset.img_paths[idx]))
     image_path = test_loader.dataset.img_paths[idx]
-    out['bboxes'] = np.loadtxt(image_path.replace('images', 'txt').replace('jpg', 'txt'),
-              delimiter='\t', usecols=[0,1,2,3,4,5,6,7])
+#     out['bboxes'] = np.loadtxt(image_path.replace('images', 'txt').replace('jpg', 'txt'),
+#               delimiter='\t', usecols=[0,1,2,3,4,5,6,7])
+    try:
+        out['bboxes'] = np.loadtxt(image_path.replace('image', 'txt').replace('jpg', 'txt').replace('png', 'txt').replace('tif', 'txt'),
+                  delimiter='\t', usecols=[0,1,2,3,4,5,6,7])
+    except:
+        out['bboxes'] = np.loadtxt(image_path.replace('image', 'txt').replace('jpg', 'txt').replace('png', 'txt').replace('tif', 'txt'),
+                  delimiter=',', usecols=[0,1,2,3,4,5,6,7])
     rf.write_result(image_name, image_path, out)
