@@ -15,7 +15,9 @@ import time
 from mmcv.parallel import DataContainer as DC
 
 
-ic15_test_data_dir = '/home/jovyan/local/2_public_data/TwinReader/STD_data/Korean/labeled/보험금청구서/images/'
+ic15_test_data_dir = '/home/jovyan/local/1_user/hgoh@agilesoda.ai/TwinReader/PANPP/data/TestData/Core/image/'
+# ic15_test_data_dir = '/home/jovyan/local/1_user/hgoh@agilesoda.ai/TwinReader/PANPP/data/TestData/Deprecated/'
+# ic15_test_data_dir = '/home/jovyan/local/2_public_data/TwinReader/STD_data/Korean/labeled/보험금청구서/images/'
 # ic15_test_data_dir = '/home/jovyan/local/1_user/hgoh@agilesoda.ai/3_Org_Imp/test/'
 
 def get_img(img_path, read_type='pil'):
@@ -90,6 +92,7 @@ class PAN_PP_TEST(data.Dataset):
             img_names = [img_name for img_name in mmcv.utils.scandir(data_dir, '.jpg')]
             img_names.extend([img_name for img_name in mmcv.utils.scandir(data_dir, '.png')])
             img_names.extend([img_name for img_name in mmcv.utils.scandir(data_dir, '.jpeg')])
+            img_names.extend([img_name for img_name in mmcv.utils.scandir(data_dir, '.tif')])
             #img_names.extend([img_name for img_name in mmcv.utils.scandir(data_dir, '.gif')])
 
             img_paths = []
