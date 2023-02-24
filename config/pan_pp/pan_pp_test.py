@@ -33,7 +33,7 @@ model = dict(
 data = dict(
     batch_size=1,
     train=dict(
-        type='PAN_PP_TEST',
+        type='PAN_PP_TRAIN',
         split='train',
         is_transform=True,
         img_size=736,
@@ -56,6 +56,7 @@ train_cfg = dict(
     epoch=200,
     optimizer='Adam',
     use_ex=False,
+    pretrain='pretrained/doc_panpp_best_weight.pth.tar',
 )
 test_cfg = dict(
     min_score=0.75,
