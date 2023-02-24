@@ -12,6 +12,9 @@ from models import build_model
 from models.utils import fuse_module
 from utils import AverageMeter, Corrector, ResultFormat, Visualizer
 
+import time
+import csv
+
 
 def model_structure(model):
     blank = ' '
@@ -87,11 +90,16 @@ def test(test_loader, model, cfg):
         # prepare input
         data['imgs'] = data['imgs'].cuda()
         data.update(dict(cfg=cfg))
-
+        
+        start = time.time()
         # forward
         with torch.no_grad():
-            outputs = model(**data)
-
+            outputs, l = model(**data)
+        end = time.time()
+        with open('./results/time/tmp.csv', 'a', encoding='utf8') as f:
+            wr = csv.writer(f)
+            wr.writerow([*l, end - start])
+            
 #         if cfg.report_speed:
 #             report_speed(outputs, speed_meters)
         # post process of recognition
