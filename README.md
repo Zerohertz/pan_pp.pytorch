@@ -1,4 +1,3 @@
----
 # [Speed Improvement of PAN++](https://github.com/Zerohertz/pan_pp.pytorch/tree/SpeedImprovement)
 
 ---
