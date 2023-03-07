@@ -23,6 +23,11 @@ class PAN_PP(nn.Module):
 
         self.fpem1 = build_neck(neck)
         self.fpem2 = build_neck(neck)
+        if neck.fpems == 3:
+            self.fpem3 = build_neck(neck) ###
+        elif neck.fpems == 4:
+            self.fpem3 = build_neck(neck) ###
+            self.fpem4 = build_neck(neck) ###
 
         self.det_head = build_head(detection_head)
         self.rec_head = None
@@ -71,7 +76,12 @@ class PAN_PP(nn.Module):
         # FPEM
         f1, f2, f3, f4 = self.fpem1(f1, f2, f3, f4)
         f1, f2, f3, f4 = self.fpem2(f1, f2, f3, f4)
-
+        if cfg.model.neck.fpems == 3:
+            f1, f2, f3, f4 = self.fpem3(f1, f2, f3, f4) ###
+        elif cfg.model.neck.fpems == 4:
+            f1, f2, f3, f4 = self.fpem3(f1, f2, f3, f4) ###
+            f1, f2, f3, f4 = self.fpem4(f1, f2, f3, f4) ###
+            
         # FFM
         f2 = self._upsample(f2, f1.size())
         f3 = self._upsample(f3, f1.size())
@@ -85,7 +95,7 @@ class PAN_PP(nn.Module):
 
         # detection
         out_det = self.det_head(f)
-
+#         print('out_det', out_det.requires_grad)
         if not self.training and cfg.report_speed:
             torch.cuda.synchronize()
             outputs.update(dict(det_head_time=time.time() - start))
@@ -93,9 +103,13 @@ class PAN_PP(nn.Module):
 
         if self.training:
             out_det = self._upsample(out_det, imgs.size())
+#             print('out_det', out_det.requires_grad)
             loss_det = self.det_head.loss(
                 out_det, gt_texts, gt_kernels, training_masks,
                 gt_instances, gt_bboxes)
+#             print('text', loss_det['loss_text'].requires_grad)
+#             print('kernels', loss_det['loss_kernels'].requires_grad)
+#             print('emb', loss_det['loss_emb'].requires_grad)
             outputs.update(loss_det)
         else:
             out_det = self._upsample(out_det, imgs.size(), cfg.test_cfg.scale)

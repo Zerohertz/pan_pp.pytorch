@@ -20,6 +20,14 @@ np.random.seed(123456)
 random.seed(123456)
 EPS = 1e-6
 
+'''
+from mmcv import Config
+cfg = Config.fromfile('config/pan_pp/pan_pp_test.py')
+from models import build_model
+model = build_model(cfg.model)
+import torch
+model = torch.nn.DataParallel(model).cuda()
+'''
 
 def train(train_loader, model, optimizer, epoch, start_iter, cfg):
     model.train()
@@ -220,7 +228,18 @@ def main(args):
             cfg.train_cfg.pretrain), 'Error: no pretrained weights found!'
         print('Finetuning from pretrained model %s.' % cfg.train_cfg.pretrain)
         checkpoint = torch.load(cfg.train_cfg.pretrain)
-        model.load_state_dict(checkpoint['state_dict'])
+        nmd = model.state_dict()
+        pretrained_dict = {k: v for k, v in checkpoint['state_dict'].items() if k in nmd}
+        model.load_state_dict(pretrained_dict, False)
+        for n, p in model.named_parameters():
+            print(n, p.requires_grad)
+            if 'fpem3' in n or 'fpem4' in n:
+                p.requires_grad = True
+            elif 'det_head' in n:
+                p.requires_grad = True
+            else:
+                p.requires_grad = False
+            print(n, p.requires_grad)
     if args.resume:
         assert osp.isfile(args.resume), 'Error: no checkpoint directory found!'
         print('Resuming from checkpoint %s.' % args.resume)
@@ -232,7 +251,7 @@ def main(args):
 
     for epoch in range(start_epoch, cfg.train_cfg.epoch):
         print('\nEpoch: [%d | %d]' % (epoch + 1, cfg.train_cfg.epoch))
-
+        
         train(train_loader, model, optimizer, epoch, start_iter, cfg)
 
         state = dict(epoch=epoch + 1,

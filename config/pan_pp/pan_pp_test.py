@@ -7,7 +7,8 @@ model = dict(
     neck=dict(
         type='FPEM_v2',
         in_channels=(256, 512, 1024, 2048),
-        out_channels=128
+        out_channels=128,
+        fpems=4
     ),
     detection_head=dict(
         type='PAN_PP_DetHead',
@@ -27,7 +28,8 @@ model = dict(
             feature_dim=4,
             loss_weight=0.25
         ),
-        use_coordconv=False,
+#         use_coordconv=False,
+        use_coordconv=True,
     )
 )
 data = dict(
@@ -47,11 +49,15 @@ data = dict(
         split='test',
         short_size=1024,
         read_type='cv2',
-        with_rec=False
+        with_rec=False,
+#         data='/home/jovyan/local/1_user/hgoh@agilesoda.ai/TwinReader/PANPP/data/TestData/Core/image/'
+#         data='/home/jovyan/local/1_user/hgoh@agilesoda.ai/TwinReader/PANPP/data/TestData/Deprecated/'
+        data='/home/jovyan/local/1_user/hgoh@agilesoda.ai/TwinReader/PANPP/data/target/'
     )
 )
 train_cfg = dict(
-    lr=1e-3,
+#     lr=1e-3,
+    lr=1e-2,
     schedule='polylr',
     epoch=200,
     optimizer='Adam',
@@ -65,4 +71,10 @@ test_cfg = dict(
     scale=2,
     bbox_type='rect',
     result_path='outputs',
+#     pretrain='pretrained/doc_panpp_best_weight.pth.tar', # Main
+    pretrain='./checkpoints/pan_pp_test/checkpoint.pth.tar', # tmp
+#     pretrain='./checkpoints/pan_pp_test/checkpoint_120ep.pth.tar', # tmp
+#     pretrain='./checkpoints/pan_pp_test_ft/checkpoint_110ep.pth.tar', # Fine_Tuning
+#     pretrain='./checkpoints/pan_pp_test_fpem3/checkpoint_110ep.pth.tar', # FPEMs_3
+#     pretrain='./checkpoints/pan_pp_test_fpem4/checkpoint_575ep.pth.tar', # FPEMs_4
 )

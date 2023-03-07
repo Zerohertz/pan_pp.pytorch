@@ -10,7 +10,6 @@ from ..loss import build_loss, iou, ohem_batch
 from ..post_processing import pa, boxgen
 from ..utils import CoordConv2d
 
-import csv
 
 class PAN_PP_DetHead(nn.Module):
     def __init__(self,
@@ -57,8 +56,11 @@ class PAN_PP_DetHead(nn.Module):
 
     def forward(self, f):
         out = self.conv1(f)
+#         print('out1', out.requires_grad)
         out = self.relu1(self.bn1(out))
+#         print('out2', out.requires_grad)
         out = self.conv2(out)
+#         print('out3', out.requires_grad)
         return out
 
     def get_results(self, out, img_meta, cfg):
@@ -135,6 +137,9 @@ class PAN_PP_DetHead(nn.Module):
         texts = out[:, 0, :, :]
         kernels = out[:, 1:2, :, :]
         embs = out[:, 2:, :, :]
+#         print('text', texts.requires_grad)
+#         print('kernels', kernels.requires_grad)
+#         print('emb', embs.requires_grad)
 
         selected_masks = ohem_batch(texts, gt_texts, training_masks)
         # loss_text = dice_loss(texts, gt_texts, selected_masks, reduce=False)
