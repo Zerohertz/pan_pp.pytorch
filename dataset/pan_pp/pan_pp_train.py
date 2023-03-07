@@ -25,7 +25,7 @@ def get_img(img_path, read_type='cv2'):
             img = cv2.imread(img_path)
             img = img[:, :, [2, 1, 0]]
         elif read_type == 'pil':
-            img = np.array(Image.open(img_path))
+            img = np.array(Image.open(img_path).convert('RGB'))
     except Exception as e:
         print(img_path)
         raise
@@ -102,6 +102,12 @@ def scale_aligned(img, h_scale, w_scale):
     if w % 32 != 0:
         w = w + (32 - w % 32)
     img = cv2.resize(img, dsize=(w, h))
+    '''
+    from mmcv import Config
+    cfg = Config.fromfile('config/pan_pp/pan_pp_test.py')
+    from dataset import build_data_loader
+    data_loader = build_data_loader(cfg.data.train)
+    '''
     return img
 
 
@@ -270,6 +276,7 @@ class PAN_PP_TRAIN(data.Dataset):
         img_names.extend([img_name for img_name in mmcv.utils.scandir(tt_train_data_dir, '.png')])
         img_names.extend([img_name for img_name in mmcv.utils.scandir(tt_train_data_dir, '.jpeg')])
         img_names.extend([img_name for img_name in mmcv.utils.scandir(tt_train_data_dir, '.tif')])
+        img_names.extend([img_name for img_name in mmcv.utils.scandir(tt_train_data_dir, '.TIF')])
 
         for idx, img_name in enumerate(img_names):
             img_path = tt_train_data_dir + img_name
