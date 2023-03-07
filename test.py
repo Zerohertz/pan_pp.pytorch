@@ -148,12 +148,12 @@ def main(args):
     model = build_model(cfg.model)
     model = model.cuda()
 
-    if args.checkpoint is not None:
-        if os.path.isfile(args.checkpoint):
+    if cfg.test_cfg.pretrain is not None:
+        if os.path.isfile(cfg.test_cfg.pretrain):
             print("Loading model and optimizer from checkpoint '{}'".format(
-                args.checkpoint))
+                cfg.test_cfg.pretrain))
 
-            checkpoint = torch.load(args.checkpoint)
+            checkpoint = torch.load(cfg.test_cfg.pretrain)
 
             d = dict()
             for key, value in checkpoint['state_dict'].items():
@@ -174,13 +174,9 @@ def main(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Hyperparams')
     parser.add_argument('config', default='config/pan_pp/pan_pp_test.py', help='config file path')
-    parser.add_argument('checkpoint', nargs='?', type=str, default=None)
     parser.add_argument('--report_speed', action='store_true')
-    parser.add_argument('--resize_const', default=1)
-    parser.add_argument('--pos_const', default=0)
-    parser.add_argument('--len_const', default=0)
-#     parser.add_argument('--vis', action='store_true')
-#     parser.add_argument('--debug', action='store_true')
+    parser.add_argument('--resize_const', default=2)
+    parser.add_argument('--pos_const', default=0.2)
+    parser.add_argument('--len_const', default=0.5)
     args = parser.parse_args()
-    args.checkpoint = './pretrained/doc_panpp_best_weight.pth.tar'
     main(args)
