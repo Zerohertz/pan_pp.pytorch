@@ -47,6 +47,9 @@ exe(){
     mv ./20* ./$tmp
     cd ..
     
+    ## Move Cfg
+    cp ./config/pan_pp/pan_pp_test.py ./outputs/$tmp/
+    
     ## Evaluation
     cd results/evaluation
     rm -rf $tmp.csv
@@ -59,9 +62,13 @@ exe(){
 }
 
 # exe
-read -p 'Resize Constant: ' rcs
-read -p 'Position Constant: ' pcs
-read -p 'Length Constant: ' lcs
+# read -p 'Resize Constant: ' rcs
+# read -p 'Position Constant: ' pcs
+# read -p 'Length Constant: ' lcs
+
+rcs=2
+pcs=0.2
+lcs=0.5
 
 for rc in $rcs
 do
