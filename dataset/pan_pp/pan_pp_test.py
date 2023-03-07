@@ -15,11 +15,6 @@ import time
 from mmcv.parallel import DataContainer as DC
 
 
-ic15_test_data_dir = '/home/jovyan/local/1_user/hgoh@agilesoda.ai/TwinReader/PANPP/data/TestData/Core/image/'
-# ic15_test_data_dir = '/home/jovyan/local/1_user/hgoh@agilesoda.ai/TwinReader/PANPP/data/TestData/Deprecated/'
-# ic15_test_data_dir = '/home/jovyan/local/2_public_data/TwinReader/STD_data/Korean/labeled/보험금청구서/images/'
-# ic15_test_data_dir = '/home/jovyan/local/1_user/hgoh@agilesoda.ai/3_Org_Imp/test/'
-
 def get_img(img_path, read_type='pil'):
     try:
         if read_type == 'cv2':
@@ -75,7 +70,8 @@ class PAN_PP_TEST(data.Dataset):
                  kernel_scale=0.5,
                  with_rec=False,
                  read_type='pil',
-                 report_speed=False):
+                 report_speed=False,
+                 data=''):
         self.split = split
         self.is_transform = is_transform
 
@@ -85,7 +81,7 @@ class PAN_PP_TEST(data.Dataset):
         self.with_rec = with_rec
         self.read_type = read_type
         
-        data_dirs = [ic15_test_data_dir]
+        data_dirs = [data]
         self.img_paths = []
 
         for data_dir in data_dirs:
