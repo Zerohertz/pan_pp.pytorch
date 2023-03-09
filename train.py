@@ -187,7 +187,7 @@ def main(args):
         data_loader,
         batch_size=cfg.data.batch_size,
 #         shuffle=not cfg.debug,
-        num_workers=8,
+        num_workers=16,
         drop_last=True,
         pin_memory=True)
 
