@@ -13,7 +13,6 @@ from arg_parser import PARAMS
 import concurrent.futures
 from tqdm import tqdm
 
-import argparse
 import csv
 
 
