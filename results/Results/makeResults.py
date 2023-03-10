@@ -8,6 +8,7 @@ import argparse
 plt.rcParams['font.family'] = 'Times New Roman'
 plt.rcParams['font.size'] = 20
 
+'''
 def plot_result(Ver, Met, Time, ext, Name=''):
     N = len(ext)
     Met, Time = np.array(Met), np.array(Time)
@@ -43,7 +44,37 @@ def plot_result(Ver, Met, Time, ext, Name=''):
     plt.legend(bs, labels, loc='upper right', bbox_to_anchor=(1.41, 1.02))
     if Name != '':
         plt.savefig(Name + '.png', dpi=300, bbox_inches='tight', pad_inches=0.3, transparent=False)
-        
+'''
+
+def plot_result(Ver, Met, Time, ext, Name=''):
+    N = len(ext)
+    Met, Time = np.array(Met), np.array(Time)
+    Ver, Met, Time = [Ver[i] for i in ext], Met[:,ext], Time[:,ext]
+    idx = np.arange(N) * 4 # 0 ~ 4X(N-1)
+    bar_width = 1
+    fig = plt.figure(figsize=(15, 10))
+    plt.subplot(2,1,1)
+    plt.grid(True)
+    fig.set_facecolor('white')
+    plt.bar(idx - bar_width, Met[0], bar_width, label='HMean', color='black', zorder=10)
+    plt.bar(idx, Met[1], bar_width, label='Precision', color='red', zorder=10)
+    plt.bar(idx + bar_width, Met[2], bar_width, label='Recall', color='blue', zorder=10)
+    plt.xticks(idx, Ver, rotation=0)
+    plt.xlim([-N, 4*(N - 1) + N])
+    plt.ylabel('[%]')
+    plt.ylim([95, 97.25])
+    plt.legend(loc='upper right', bbox_to_anchor=(1.21, 1.02))
+    plt.subplot(2,1,2)
+    plt.grid(True)
+    plt.bar(idx, Time[5], label='Total\nprocessing\ntime', color='olive', zorder=10)
+    plt.xticks(idx, Ver, rotation=0)
+    plt.xlim([-N, 4*(N - 1) + N])
+    plt.ylim([0, 170])
+    plt.ylabel('Time [ms]')
+    plt.legend(loc='upper right', bbox_to_anchor=(1.21, 1.02))
+    if Name != '':
+        plt.savefig(Name + '.png', dpi=300, bbox_inches='tight', pad_inches=0.3, transparent=False)
+
 def compareIMG(img, cut, Name='', *Ver):
     if len(Ver) > 4:
         return
@@ -82,24 +113,44 @@ if __name__ == '__main__':
         K = data[0][:]
         N = len(K)
         Ver = ['' for _ in range(N)]
-        Time = [[0 for _ in range(N)] for _ in range(5)]
+        Time = [[0 for _ in range(N)] for _ in range(6)]
         met = {}
         Met = [[0 for _ in range(N)] for _ in range(3)]
         for i in range(N):
             Ver[i] = K[i]
-            for j in range(5):
+            for j in range(6):
                 Time[j][i] = data[j+1][i]
+        cnt = 0
         for i in range(N):
-            data = pd.read_csv('../evaluation/' + Ver[i] + '.csv', header=None)        
-            for j in range(3):
-                Met[j][i] = data[j+1][0]
-        if args.compare == None:
-            plot_result(Ver, Met, Time, list(range(N)), 'Result')
-        else:
-            tmp = []
-            for i in map(str, args.compare[:-1].split(',')):
-                tmp.append(Ver.index(i))
-            plot_result(Ver, Met, Time, tmp, args.name)
+            try:
+                data = pd.read_csv('../evaluation/' + Ver[i] + '.csv', header=None)        
+                for j in range(3):
+                    Met[j][i] = data[j+1][0]
+                cnt += 1
+            except:
+                Ver[i] += '\t-----X'
+                continue
+        tmp = []
+        opt = []
+        for v in Ver:
+            opt.append(v)
+        while True:
+            print('='*20)
+            for i, j in enumerate(opt):
+                print(i, j)
+            print('='*20)
+            if cnt <= 0:
+                break
+            x = input()
+            if x == '':
+                break
+            else:
+                x = int(x)
+                tmp.append(Ver.index(opt[x]))
+                opt[x] += '\t-----X'
+                cnt -= 1
+        print("Saving...")
+        plot_result(Ver, Met, Time, tmp, args.name)
     elif args.mode == '1':
         os.chdir('../../outputs/Ground_Truth')
         data = []
