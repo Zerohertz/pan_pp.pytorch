@@ -8,7 +8,7 @@ model = dict(
         type='FPEM_v2',
         in_channels=(256, 512, 1024, 2048),
         out_channels=128,
-        fpems=4
+        fpems=2
     ),
     detection_head=dict(
         type='PAN_PP_DetHead',
@@ -69,8 +69,5 @@ test_cfg = dict(
     scale=2,
     bbox_type='rect',
     result_path='outputs',
-#     pretrain='pretrained/doc_panpp_best_weight.pth.tar', # Main
-#     pretrain='./checkpoints/pan_pp_test/checkpoint.pth.tar', # tmp
-    pretrain='./checkpoints/pan_pp_test/checkpoint_180ep.pth.tar', # tmp
-#     pretrain='./checkpoints/pan_pp_test_FPEMs_4_CC/checkpoint_110ep.pth.tar', # 4 stacked FPEMs & CoordConv
+    pretrain='pretrained/doc_panpp_best_weight.pth.tar', # Main
 )

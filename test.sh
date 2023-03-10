@@ -21,6 +21,9 @@ rm -rf ${resize_const}_${pos_const}_${len_const}.csv
 cd ..
 cd ..
 
+# cfg=pan_pp_TwinReader
+cfg=pan_pp_test
+
 # Execution
 exe(){
     ## Test
@@ -31,7 +34,7 @@ exe(){
     tmp="${resize_const}_${pos_const}_${len_const}"
     fi
     echo "Exp Name: " $tmp
-    CUDA_VISIBLE_DEVICES=${CUDA_NUM} python test.py config/pan_pp/pan_pp_test.py --resize_const=${resize_const} --pos_const=${pos_const} --len_const=${len_const}
+    CUDA_VISIBLE_DEVICES=${CUDA_NUM} python test.py config/pan_pp/$cfg.py --resize_const=${resize_const} --pos_const=${pos_const} --len_const=${len_const}
     
     ## Rename tmp.csv & Make time.csv
     cd results/time
@@ -48,7 +51,7 @@ exe(){
     cd ..
     
     ## Move Cfg
-    cp ./config/pan_pp/pan_pp_test.py ./outputs/$tmp/
+    cp ./config/pan_pp/$cfg.py ./outputs/$tmp/
     
     ## Evaluation
     cd results/evaluation
