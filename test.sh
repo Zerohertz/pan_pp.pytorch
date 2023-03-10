@@ -13,28 +13,22 @@ read -p 'CUDA_NUM: ' CUDA_NUM
 # Initialization
 cd outputs
 rm -rf 20*
-rm -rf ${resize_const}_${pos_const}_${len_const}
 cd ..
 cd results/time
 rm -rf tmp.csv
-rm -rf ${resize_const}_${pos_const}_${len_const}.csv
 cd ..
 cd ..
 
 # cfg=pan_pp_TwinReader
 cfg=pan_pp_test
+# cfg=pan_pp_target
 
 # Execution
 exe(){
     ## Test
-    echo "${resize_const}_${pos_const}_${len_const}"
     read -p "Exp Name: " tmp
-    if [ -z $tmp ]
-    then
-    tmp="${resize_const}_${pos_const}_${len_const}"
-    fi
     echo "Exp Name: " $tmp
-    CUDA_VISIBLE_DEVICES=${CUDA_NUM} python test.py config/pan_pp/$cfg.py --resize_const=${resize_const} --pos_const=${pos_const} --len_const=${len_const}
+    CUDA_VISIBLE_DEVICES=${CUDA_NUM} python test.py config/pan_pp/$cfg.py
     
     ## Rename tmp.csv & Make time.csv
     cd results/time
@@ -64,25 +58,4 @@ exe(){
     cd ..
 }
 
-# exe
-# read -p 'Resize Constant: ' rcs
-# read -p 'Position Constant: ' pcs
-# read -p 'Length Constant: ' lcs
-
-rcs=2
-pcs=0.2
-lcs=0.5
-
-for rc in $rcs
-do
-    for pc in $pcs
-    do
-        for lc in $lcs
-        do
-            resize_const=$rc
-            pos_const=$pc
-            len_const=$lc
-            exe
-        done
-    done
-done
+exe
