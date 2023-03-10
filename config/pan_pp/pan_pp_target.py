@@ -50,7 +50,8 @@ data = dict(
         short_size=1024,
         read_type='cv2',
         with_rec=False,
-        data='/home/jovyan/local/1_user/hgoh@agilesoda.ai/TwinReader/PANPP/data/TestData/image/'
+#         data='/home/jovyan/local/1_user/hgoh@agilesoda.ai/TwinReader/PANPP/data/TestData/image/'
+        data='/home/jovyan/local/1_user/hgoh@agilesoda.ai/TwinReader/PANPP/data/Target/'
     )
 )
 train_cfg = dict(
@@ -68,7 +69,7 @@ test_cfg = dict(
     min_kernel_area=0.1,
     scale=2,
     bbox_type='rect',
-    result_path='outputs',
+    result_path='outputs/target',
 #     pretrain='pretrained/doc_panpp_best_weight.pth.tar', # Main
 #     pretrain='./checkpoints/pan_pp_test/checkpoint.pth.tar', # tmp
     pretrain='./checkpoints/pan_pp_test/checkpoint_200ep.pth.tar', # tmp
