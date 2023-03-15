@@ -1,9 +1,11 @@
-# [Speed Improvement of PAN++](https://github.com/Zerohertz/pan_pp.pytorch/tree/SpeedImprovement)
++ [Speed Improvement of PAN++](https://github.com/Zerohertz/pan_pp.pytorch/tree/SpeedImprovement)
++ [TensorRT](https://github.com/Zerohertz/pan_pp.pytorch/tree/TensorRT)
 
 ---
-# Performance Improvement of PAN++
 
----
+<details>
+<summary>Read more</summary>
+<div>
 
 ## News
 - (2022/12/08) We will release the code and models of FAST in [link](https://github.com/czczup/FAST).
@@ -161,3 +163,6 @@ This project is developed and maintained by [IMAGINE Lab@National Key Laboratory
 <img src="logo.jpg" alt="IMAGINE Lab">
 
 This project is released under the [Apache 2.0 license](https://github.com/whai362/pan_pp.pytorch/blob/master/LICENSE).
+
+</div>
+</details>
