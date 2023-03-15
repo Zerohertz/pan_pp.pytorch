@@ -135,6 +135,10 @@
 
 ---
 
+<details>
+<summary>Read more</summary>
+<div>
+
 ## News
 - (2022/12/08) We will release the code and models of FAST in [link](https://github.com/czczup/FAST).
 - (2022/10/09) We release stabler code for PAN++, see [pan_pp_stable](https://github.com/whai362/pan_pp_stable).
@@ -291,3 +295,6 @@ This project is developed and maintained by [IMAGINE Lab@National Key Laboratory
 <img src="logo.jpg" alt="IMAGINE Lab">
 
 This project is released under the [Apache 2.0 license](https://github.com/whai362/pan_pp.pytorch/blob/master/LICENSE).
+
+</div>
+</details>
