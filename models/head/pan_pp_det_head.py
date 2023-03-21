@@ -10,6 +10,7 @@ from ..loss import build_loss, iou, ohem_batch
 from ..post_processing import pa, boxgen
 from ..utils import CoordConv2d
 
+# import csv
 
 class PAN_PP_DetHead(nn.Module):
     def __init__(self,
@@ -56,17 +57,14 @@ class PAN_PP_DetHead(nn.Module):
 
     def forward(self, f):
         out = self.conv1(f)
-#         print('out1', out.requires_grad)
         out = self.relu1(self.bn1(out))
-#         print('out2', out.requires_grad)
         out = self.conv2(out)
-#         print('out3', out.requires_grad)
         return out
 
     def get_results(self, out, img_meta, cfg):
-        g0 = time.time()
+#         g0 = time.time()
         #####################################################################################################
-        resize_const, pos_const, len_const = map(float, cfg['resize_param'])
+        resize_const, pos_const, len_const = map(float, [2.0, 0.2, 0.5])
         results = {}
         if cfg.report_speed:
             torch.cuda.synchronize()
@@ -85,20 +83,20 @@ class PAN_PP_DetHead(nn.Module):
         kernels = kernels.data.cpu().numpy()[0].astype(np.uint8)
         emb = emb.cpu().numpy()[0].astype(np.float32)
         #####################################################################################################
-        g0 = time.time() - g0
+#         g0 = time.time() - g0
         #####################################################################################################
         #####################################################################################################
         #####################################################################################################
-        g1 = time.time()
+#         g1 = time.time()
         #####################################################################################################
         label = pa(kernels, emb,
                    cfg.test_cfg.min_kernel_area / (cfg.test_cfg.scale**2))
         #####################################################################################################
-        g1 = time.time() - g1
+#         g1 = time.time() - g1
         #####################################################################################################
         #####################################################################################################
         #####################################################################################################
-        g2 = time.time()
+#         g2 = time.time()
         #####################################################################################################
         org_img_size = img_meta['org_img_size'][0]
         img_size = img_meta['img_size'][0]
@@ -111,35 +109,35 @@ class PAN_PP_DetHead(nn.Module):
         score = cv2.resize(score, (int(img_size[1]//resize_const), int(img_size[0]//resize_const)),
                            interpolation=cv2.INTER_NEAREST)
         #####################################################################################################
-        g2 = time.time() - g2
+#         g2 = time.time() - g2
         #####################################################################################################
         #####################################################################################################
         #####################################################################################################
-        g3 = time.time()
+#         g3 = time.time()
         #####################################################################################################
         min_area = cfg.test_cfg.min_area / ((cfg.test_cfg.scale**2) * (resize_const**2))
         bboxes = boxgen(label, score, label_num, min_area, cfg.test_cfg.min_score, scale, pos_const, len_const)
         #####################################################################################################
-        g3 = time.time() - g3
+#         g3 = time.time() - g3
         #####################################################################################################
         #####################################################################################################
         #####################################################################################################
-        g4 = time.time()
+#         g4 = time.time()
         #####################################################################################################
         results['bboxes'] = bboxes
         #####################################################################################################
-        g4 = time.time() - g4
+#         g4 = time.time() - g4
         #####################################################################################################
-        return results, [g0, g1, g2, g3, g4]
+#         with open('./results/time/tmp.csv', 'a', encoding='utf8') as f:
+#             wr = csv.writer(f)
+#             wr.writerow([g0, g1, g2, g3, g4])
+        return results
 
     def loss(self, out, gt_texts, gt_kernels, training_masks, gt_instances,
              gt_bboxes):
         texts = out[:, 0, :, :]
         kernels = out[:, 1:2, :, :]
         embs = out[:, 2:, :, :]
-#         print('text', texts.requires_grad)
-#         print('kernels', kernels.requires_grad)
-#         print('emb', embs.requires_grad)
 
         selected_masks = ohem_batch(texts, gt_texts, training_masks)
         # loss_text = dice_loss(texts, gt_texts, selected_masks, reduce=False)

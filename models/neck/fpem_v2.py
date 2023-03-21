@@ -1,11 +1,10 @@
 import torch.nn as nn
-import torch.nn.functional as F
 
 from ..utils import Conv_BN_ReLU
 
 
 class FPEM_v2(nn.Module):
-    def __init__(self, in_channels, out_channels, fpems):
+    def __init__(self, in_channels, out_channels):
         super(FPEM_v2, self).__init__()
         planes = out_channels
         self.dwconv3_1 = nn.Conv2d(planes,
@@ -64,7 +63,8 @@ class FPEM_v2(nn.Module):
 
     def _upsample_add(self, x, y):
         _, _, H, W = y.size()
-        return F.interpolate(x, size=(H, W), mode='bilinear') + y
+        upsample = nn.Upsample(size=(H, W), mode='bilinear')
+        return upsample(x) + y
 
     def forward(self, f1, f2, f3, f4):
         f3_ = self.smooth_layer3_1(self.dwconv3_1(self._upsample_add(f4, f3)))

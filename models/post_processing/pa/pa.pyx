@@ -8,7 +8,6 @@ cimport libcpp.pair
 cimport libcpp.queue
 from libcpp.pair cimport *
 from libcpp.queue cimport *
-from cython.parallel import prange
 
 
 @cython.boundscheck(False)
@@ -33,7 +32,7 @@ cdef np.ndarray[np.int32_t, ndim=2] _pa(np.ndarray[np.uint8_t, ndim=3] kernels,
     cdef int i, j, tmp
     
 #     print(H*W) -> 376832
-    for i in prange(H, nogil=True):
+    for i in range(H):
         for j in range(W):
             tmp = label[i, j]
             if tmp == 0:
