@@ -41,8 +41,7 @@ data = dict(
         short_size=736,
         kernel_scale=0.5,
         read_type='pil',
-        with_rec=False,
-        data='/home/jovyan/local/1_user/hgoh@agilesoda.ai/TwinReader/pan_pp.pytorch/data/TrainingData/image/'
+        with_rec=False
     ),
     test=dict(
         type='PAN_PP_TEST',
