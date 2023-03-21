@@ -22,6 +22,11 @@ class PAN_PP(nn.Module):
 
         self.fpem1 = build_neck(neck)
         self.fpem2 = build_neck(neck)
+        if neck.fpems == 3:
+            self.fpem3 = build_neck(neck)
+        elif neck.fpems == 4:
+            self.fpem3 = build_neck(neck)
+            self.fpem4 = build_neck(neck)
 
         self.det_head = build_head(detection_head)
         self.rec_head = None
@@ -58,6 +63,14 @@ class PAN_PP(nn.Module):
         # FPEM
         f1, f2, f3, f4 = self.fpem1(f1, f2, f3, f4)
         f1, f2, f3, f4 = self.fpem2(f1, f2, f3, f4)
+        try:
+            f1, f2, f3, f4 = self.fpem3(f1, f2, f3, f4)
+        except:
+            pass
+        try:
+            f1, f2, f3, f4 = self.fpem4(f1, f2, f3, f4)
+        except:
+            pass
 
         # FFM
         f2 = self._upsample(f2, f1.size())

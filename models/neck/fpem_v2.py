@@ -4,7 +4,7 @@ from ..utils import Conv_BN_ReLU
 
 
 class FPEM_v2(nn.Module):
-    def __init__(self, in_channels, out_channels):
+    def __init__(self, in_channels, out_channels, fpems):
         super(FPEM_v2, self).__init__()
         planes = out_channels
         self.dwconv3_1 = nn.Conv2d(planes,
