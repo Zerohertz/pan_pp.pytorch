@@ -1,1 +1,0 @@
-cd tt && python2 Deteval.py && cd ..

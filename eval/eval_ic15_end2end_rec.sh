@@ -1,1 +1,0 @@
-cd ic15_end2end_rec && python2 script.py -g=gt.zip -s=../../outputs/submit_ic15_rec.zip && cd ..
