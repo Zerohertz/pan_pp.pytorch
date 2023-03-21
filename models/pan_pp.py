@@ -44,9 +44,6 @@ class PAN_PP(nn.Module):
                 word_masks=None,
                 img_metas=None,
                 cfg=None):
-        if cfg.debug:
-            from IPython import embed
-            embed()
 
         outputs = dict()
 
