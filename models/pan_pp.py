@@ -49,11 +49,6 @@ class PAN_PP(nn.Module):
         # backbone
         f = self.backbone(imgs)
 
-        if not self.training and cfg.report_speed:
-            torch.cuda.synchronize()
-            outputs.update(dict(backbone_time=time.time() - start))
-            start = time.time()
-
         # reduce channel
         f1 = self.reduce_layer1(f[0])
         f2 = self.reduce_layer2(f[1])
@@ -70,18 +65,8 @@ class PAN_PP(nn.Module):
         f4 = self._upsample(f4, f1.size())
         f = torch.cat((f1, f2, f3, f4), 1)
 
-        if not self.training and cfg.report_speed:
-            torch.cuda.synchronize()
-            outputs.update(dict(neck_time=time.time() - start))
-            start = time.time()
-
         # detection
         out_det = self.det_head(f)
-
-        if not self.training and cfg.report_speed:
-            torch.cuda.synchronize()
-            outputs.update(dict(det_head_time=time.time() - start))
-            start = time.time()
 
         if self.training:
             out_det = self._upsample(out_det, imgs.size())
