@@ -65,7 +65,7 @@ exe(){
     cd ..
     
     ## Move Cfg
-    cp ./config/pan_pp/$cfg.py ./outputs/$tmp/
+    cp ./config/$cfg.py ./outputs/$tmp/
     
     ## Evaluation
     cd results/evaluation
