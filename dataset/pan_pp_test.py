@@ -89,6 +89,7 @@ class PAN_PP_TEST(data.Dataset):
             img_names.extend([img_name for img_name in mmcv.utils.scandir(data_dir, '.png')])
             img_names.extend([img_name for img_name in mmcv.utils.scandir(data_dir, '.jpeg')])
             img_names.extend([img_name for img_name in mmcv.utils.scandir(data_dir, '.tif')])
+            img_names.extend([img_name for img_name in mmcv.utils.scandir(data_dir, '.TIF')])
 
             img_paths = []
             for idx, img_name in enumerate(img_names):
