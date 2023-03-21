@@ -32,7 +32,7 @@ model = dict(
     )
 )
 data = dict(
-    batch_size=32,
+    batch_size=16,
     train=dict(
         type='PAN_PP_TRAIN',
         split='train',
