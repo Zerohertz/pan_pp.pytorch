@@ -15,6 +15,8 @@ import time
 from mmcv.parallel import DataContainer as DC
 
 
+ic15_test_data_dir = '/home/jovyan/local/1_user/hgoh@agilesoda.ai/twrd-std-v2/TestData/image/'
+
 def get_img(img_path, read_type='pil'):
     try:
         if read_type == 'cv2':
@@ -70,8 +72,7 @@ class PAN_PP_TEST(data.Dataset):
                  kernel_scale=0.5,
                  with_rec=False,
                  read_type='pil',
-                 report_speed=False,
-                 data=''):
+                 report_speed=False):
         self.split = split
         self.is_transform = is_transform
 
@@ -81,14 +82,13 @@ class PAN_PP_TEST(data.Dataset):
         self.with_rec = with_rec
         self.read_type = read_type
         
-        data_dirs = [data]
+        data_dirs = [ic15_test_data_dir]
         self.img_paths = []
 
         for data_dir in data_dirs:
             img_names = [img_name for img_name in mmcv.utils.scandir(data_dir, '.jpg')]
             img_names.extend([img_name for img_name in mmcv.utils.scandir(data_dir, '.png')])
             img_names.extend([img_name for img_name in mmcv.utils.scandir(data_dir, '.jpeg')])
-            img_names.extend([img_name for img_name in mmcv.utils.scandir(data_dir, '.tif')])
             #img_names.extend([img_name for img_name in mmcv.utils.scandir(data_dir, '.gif')])
 
             img_paths = []
