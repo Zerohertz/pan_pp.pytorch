@@ -44,12 +44,7 @@ class PAN_PP(nn.Module):
                 word_masks=None,
                 img_metas=None,
                 cfg=None):
-
         outputs = dict()
-
-        if not self.training and cfg.report_speed:
-            torch.cuda.synchronize()
-            start = time.time()
 
         # backbone
         f = self.backbone(imgs)
