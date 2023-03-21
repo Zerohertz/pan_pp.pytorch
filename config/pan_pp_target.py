@@ -8,7 +8,7 @@ model = dict(
         type='FPEM_v2',
         in_channels=(256, 512, 1024, 2048),
         out_channels=128,
-        fpems=4
+        fpems=2
     ),
     detection_head=dict(
         type='PAN_PP_DetHead',
