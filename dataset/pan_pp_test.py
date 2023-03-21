@@ -15,8 +15,6 @@ import time
 from mmcv.parallel import DataContainer as DC
 
 
-ic15_test_data_dir = '/home/jovyan/local/1_user/hgoh@agilesoda.ai/twrd-std-v2/TestData/image/'
-
 def get_img(img_path, read_type='pil'):
     try:
         if read_type == 'cv2':
@@ -72,7 +70,8 @@ class PAN_PP_TEST(data.Dataset):
                  kernel_scale=0.5,
                  with_rec=False,
                  read_type='pil',
-                 report_speed=False):
+                 report_speed=False,
+                 data=''):
         self.split = split
         self.is_transform = is_transform
 
@@ -82,14 +81,15 @@ class PAN_PP_TEST(data.Dataset):
         self.with_rec = with_rec
         self.read_type = read_type
         
-        data_dirs = [ic15_test_data_dir]
+        data_dirs = [data]
         self.img_paths = []
 
         for data_dir in data_dirs:
             img_names = [img_name for img_name in mmcv.utils.scandir(data_dir, '.jpg')]
             img_names.extend([img_name for img_name in mmcv.utils.scandir(data_dir, '.png')])
             img_names.extend([img_name for img_name in mmcv.utils.scandir(data_dir, '.jpeg')])
-            #img_names.extend([img_name for img_name in mmcv.utils.scandir(data_dir, '.gif')])
+            img_names.extend([img_name for img_name in mmcv.utils.scandir(data_dir, '.tif')])
+            img_names.extend([img_name for img_name in mmcv.utils.scandir(data_dir, '.TIF')])
 
             img_paths = []
             for idx, img_name in enumerate(img_names):
@@ -123,20 +123,11 @@ class PAN_PP_TEST(data.Dataset):
         img = img.convert('RGB')
         img = transforms.ToTensor()(img)
         img = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])(img)
-        #img = transforms.Normalize(mean=[0.5361854918791404, 0.5183281635179601, 0.5018696379102053],std=[0.2964283975959625, 0.2936728052870304, 0.30347264333234764])(img)
-        #img=transforms.Grayscale()(img)
-#         img=transforms.ToPILImage()(img.squeeze_(0))
-#         T = transforms.Compose([
-#             transforms.ToTensor(),            
-#             transforms.Lambda(lambda x: x.repeat(3, 1, 1))  if img.mode!='RGB'  else NoneTransform()                 
-#             ])
-#         img=T(img)
 
         data = dict(
             imgs=img,
             img_metas=img_meta
         )
-        #print('preprocess time:{}',time.time()-start)
         return data
 
     def __getitem__(self, index):

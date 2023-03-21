@@ -46,8 +46,6 @@ def train(train_loader, model, optimizer, epoch, start_iter, cfg):
     ious_kernel = AverageMeter(max_len=500)
     accs_rec = AverageMeter(max_len=500)
 
-    with_rec = hasattr(cfg.model, 'recognition_head')
-
     # start time
     start = time.time()
     for iter, data in enumerate(train_loader):
@@ -86,23 +84,6 @@ def train(train_loader, model, optimizer, epoch, start_iter, cfg):
         iou_kernel = torch.mean(outputs['iou_kernel'])
         ious_kernel.update(iou_kernel.item(), data['imgs'].size(0))
 
-        # recognition loss
-        if with_rec:
-            loss_rec = outputs['loss_rec']
-            valid = loss_rec > -EPS
-            if torch.sum(valid) > 0:
-                loss_rec = torch.mean(loss_rec[valid])
-                losses_rec.update(loss_rec.item(), data['imgs'].size(0))
-                loss = loss + loss_rec
-
-                acc_rec = outputs['acc_rec']
-                acc_rec = torch.mean(acc_rec[valid])
-                accs_rec.update(acc_rec.item(), torch.sum(valid).item())
-
-        # if cfg.debug:
-        #     from IPython import embed
-        #     embed()
-
         losses.update(loss.item(), data['imgs'].size(0))
 
         # backward
@@ -124,12 +105,9 @@ def train(train_loader, model, optimizer, epoch, start_iter, cfg):
                   f'Total: {batch_time.avg * iter / 60.0:.0f}min | ' \
                   f'ETA: {batch_time.avg * (length - iter) / 60.0:.0f}min | ' \
                   f'Loss: {losses.avg:.3f} | ' \
-                  f'Loss(text/kernel/emb{"/rec" if with_rec else ""}): ' \
                   f'{losses_text.avg:.3f}/{losses_kernels.avg:.3f}/' \
                   f'{losses_emb.avg:.3f}' \
-                  f'{"/" + format(losses_rec.avg, ".3f") if with_rec else ""} | ' \
-                  f'IoU(text/kernel): {ious_text.avg:.3f}/{ious_kernel.avg:.3f}' \
-                  f'{" | ACC rec: " + format(accs_rec.avg, ".3f") if with_rec else ""}'
+                  f'IoU(text/kernel): {ious_text.avg:.3f}/{ious_kernel.avg:.3f}'
             print(log, flush=True)
 
 
@@ -167,11 +145,7 @@ def save_checkpoint(state, checkpoint_path, cfg):
 
 def main(args):
     cfg = Config.fromfile(args.config)
-#     cfg.update(dict(debug=args.debug))
-#     cfg.data.train.update(dict(debug=args.debug))
     cfg.update(dict(debug=False))
-#     cfg.data.train.update(dict(debug=False))
-#     print(json.dumps(cfg._cfg_dict, indent=4))
 
     if args.checkpoint is not None:
         checkpoint_path = args.checkpoint
@@ -186,7 +160,6 @@ def main(args):
     train_loader = torch.utils.data.DataLoader(
         data_loader,
         batch_size=cfg.data.batch_size,
-#         shuffle=not cfg.debug,
         num_workers=16,
         drop_last=True,
         pin_memory=True)
@@ -200,11 +173,6 @@ def main(args):
                 id2char=data_loader.id2char,
             ))
     model = build_model(cfg.model)
-
-#     if cfg.debug:
-#         # from IPython import embed; embed()
-#         checkpoint = torch.load('checkpoints/tmp.pth.tar')
-#         model.load_state_dict(checkpoint['state_dict'])
 
     model = torch.nn.DataParallel(model).cuda()
 
@@ -266,9 +234,5 @@ if __name__ == '__main__':
     parser.add_argument('config', help='config file path')
     parser.add_argument('--checkpoint', nargs='?', type=str, default=None)
     parser.add_argument('--resume', nargs='?', type=str, default=None)
-    parser.add_argument('--resize_const', default=2)
-    parser.add_argument('--pos_const', default=0.2)
-    parser.add_argument('--len_const', default=0.5)
-#     parser.add_argument('--debug', action='store_true')
     args = parser.parse_args()
     main(args)

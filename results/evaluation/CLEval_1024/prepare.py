@@ -126,10 +126,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Path')
     parser.add_argument('--path', default='Ver_1')
     args = parser.parse_args()
-    gt_path = '/home/jovyan/local/1_user/hgoh@agilesoda.ai/TwinReader/PANPP/data/TestData/txt/'
-    result_path = '/home/jovyan/local/1_user/hgoh@agilesoda.ai/TwinReader/PANPP/outputs/' + args.path + '/'
-    process_gt = '/home/jovyan/local/1_user/hgoh@agilesoda.ai/TwinReader/PANPP/results/evaluation/CLEval_1024/gt'
-    process_result = '/home/jovyan/local/1_user/hgoh@agilesoda.ai/TwinReader/PANPP/results/evaluation/CLEval_1024/result'
+    gt_path = '../../../data/TestData/txt/'
+    result_path = '../../../outputs/' + args.path + '/'
+    process_gt = '../../../results/evaluation/CLEval_1024/gt'
+    process_result = '../../../results/evaluation/CLEval_1024/result'
     gt_prepare(gt_path,process_gt)
     result_prepare(result_path, process_result)
     file_rename(process_gt, process_result)

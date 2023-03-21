@@ -102,41 +102,4 @@ class PAN_PP(nn.Module):
             res_det = self.det_head.get_results(out_det, img_metas, cfg)
             outputs.update(res_det)
 
-        if self.rec_head is not None:
-            if self.training:
-                x_crops, gt_words = self.rec_head.extract_feature(
-                    f, (imgs.size(2), imgs.size(3)),
-                    gt_instances * training_masks, gt_bboxes, gt_words,
-                    word_masks)
-
-                if x_crops is not None:
-                    out_rec = self.rec_head(x_crops, gt_words)
-                    loss_rec = self.rec_head.loss(out_rec, gt_words,
-                                                  reduce=False)
-                else:
-                    loss_rec = {
-                        'loss_rec': f.new_full((1,), -1, dtype=torch.float32),
-                        'acc_rec': f.new_full((1,), -1, dtype=torch.float32)
-                    }
-                outputs.update(loss_rec)
-            else:
-                if len(res_det['bboxes']) > 0:
-                    x_crops, _ = self.rec_head.extract_feature(
-                        f, (imgs.size(2), imgs.size(3)),
-                        f.new_tensor(res_det['label'],
-                                     dtype=torch.long).unsqueeze(0),
-                        bboxes=f.new_tensor(res_det['bboxes_h'],
-                                            dtype=torch.long),
-                        unique_labels=res_det['instances'])
-                    words, word_scores = self.rec_head.forward(x_crops)
-                else:
-                    words = []
-                    word_scores = []
-
-                if cfg.report_speed:
-                    torch.cuda.synchronize()
-                    outputs.update(dict(rec_time=time.time() - start))
-                outputs.update(
-                    dict(words=words, word_scores=word_scores, label=''))
-
         return outputs

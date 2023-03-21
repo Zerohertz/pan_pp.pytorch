@@ -62,23 +62,7 @@ def report_speed(outputs, speed_meters):
 def test(test_loader, model, cfg):
     model.eval()
 
-    with_rec = hasattr(cfg.model, 'recognition_head')
-#     if with_rec:
-#         pp = Corrector(cfg.data.test.type, **cfg.test_cfg.rec_post_process)
-
-#     if cfg.vis:
-#         vis = Visualizer(vis_path=osp.join('vis/', cfg.data.test.type))
-
     rf = ResultFormat(cfg.data.test.type, cfg.test_cfg.result_path)
-
-#     if cfg.report_speed:
-#         speed_meters = dict(
-#             backbone_time=AverageMeter(500),
-#             neck_time=AverageMeter(500),
-#             det_head_time=AverageMeter(500),
-#             det_post_time=AverageMeter(500),
-#             rec_time=AverageMeter(500),
-#             total_time=AverageMeter(500))
 
     print('Start testing %d images' % len(test_loader))
     cfg.debug = False
@@ -94,27 +78,16 @@ def test(test_loader, model, cfg):
         start = time.time()
         # forward
         with torch.no_grad():
-            outputs, l = model(**data)
+            outputs = model(**data)
         end = time.time()
         with open('./results/time/tmp.csv', 'a', encoding='utf8') as f:
             wr = csv.writer(f)
-            wr.writerow([*l, end - start])
-            
-#         if cfg.report_speed:
-#             report_speed(outputs, speed_meters)
-        # post process of recognition
-#         if with_rec:
-#             outputs = pp.process(data['img_metas'], outputs)
+            wr.writerow([end - start])
 
         # save result
         image_name, _ = osp.splitext(osp.basename(test_loader.dataset.img_paths[idx]))
         image_path=test_loader.dataset.img_paths[idx]
         rf.write_result(image_name, image_path, outputs)
-#         rf.write_result(data['img_metas'], outputs)
-
-        # visualize
-#         if cfg.vis:
-#             vis.process(data['img_metas'], outputs)
 
     print('Done!')
 
@@ -123,10 +96,6 @@ def main(args):
     cfg = Config.fromfile(args.config)
     for d in [cfg, cfg.data.test]:
         d.update(dict(report_speed=args.report_speed))
-#     cfg.update(dict(vis=args.vis))
-#     cfg.update(dict(debug=args.debug))
-#     cfg.data.test.update(dict(debug=args.debug))
-    cfg['resize_param'] = [args.resize_const, args.pos_const, args.len_const]
     print(json.dumps(cfg._cfg_dict, indent=4))
 
     # data loader
@@ -175,8 +144,5 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Hyperparams')
     parser.add_argument('config', default='config/pan_pp/pan_pp_test.py', help='config file path')
     parser.add_argument('--report_speed', action='store_true')
-    parser.add_argument('--resize_const', default=2)
-    parser.add_argument('--pos_const', default=0.2)
-    parser.add_argument('--len_const', default=0.5)
     args = parser.parse_args()
     main(args)
